@@ -34,3 +34,14 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+# OS X Files
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.DS_Store
+.AppleDouble
+.LSOverride
