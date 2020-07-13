@@ -1,1 +1,9 @@
 <h1>Hello</h1>
+
+<button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Tooltipping!!">
+  Tooltip on top
+</button>
+
+<%= bootstrap_form_tag do |f| %>
+  <%= f.text_field :date, data: { behavior: "flatpickr" } %>
+<% end %>
