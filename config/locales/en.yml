@@ -30,4 +30,8 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  errors:
+    messages:
+      content_type_invalid: "has an invalid content type. Accepted file types: .pdf, .doc, .docx, .jpg"
+
   hello: "Hello world"
