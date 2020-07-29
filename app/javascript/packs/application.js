@@ -18,6 +18,8 @@ window.moment = moment
 // Date picker
 import flatpickr from 'flatpickr';
 require("flatpickr/dist/flatpickr.css");
+import monthSelect from 'flatpickr/dist/plugins/monthSelect';
+import 'flatpickr/dist/plugins/monthSelect/style.css';
 
 // Make file input dynamic
 import bsCustomFileInput from 'bs-custom-file-input';
@@ -30,7 +32,92 @@ document.addEventListener("turbolinks:load", () => {
     dateFormat: "Y-m-d"
   })
 
+  flatpickr("[data-behavior='flatpickr-months-only']", {
+    altInput: true,
+    plugins: [
+      new monthSelect()
+    ]
+  })
+
   bsCustomFileInput.init();
+
+  // Auto-fill age field from DOB
+  $('#dob-field').change(function() {
+    var dob, duration, now, years;
+    now = moment();
+    dob = moment($('#dob-field').val());
+    duration = moment.duration(now.diff(dob));
+    years = duration.asYears();
+    $('#age-field').val(Math.round(years));
+  });
+
+  // Total income field auto-filler
+  $(".income-field").change(function() {
+    var total;
+    total = function(selector) {
+      var sum;
+      sum = 0;
+      $(selector).each(function() {
+        sum += Number($(this).val());
+      });
+      return sum;
+    };
+
+    $("#total-field").val(total(".income-field"));
+  });
+
+  // Hide ACS involvement field if not residing with minors
+  $("#member_application_reside_with_minors").change(function() {
+    var selected;
+    selected = $("#member_application_reside_with_minors option:selected").text();
+    if (selected === "Yes") {
+      $("#acs-select").show();
+    } else {
+      $("#acs-select").hide();
+    }
+  });
+
+  // Hide insurance number field if insurance is "None", hide other_insurance
+  // field unless "Other" is selected, and hide medicaid_comp field if it isn't
+  // selected
+  $("#member_application_insurance_name").change(function() {
+    var selected;
+    selected = $("#member_application_insurance_name option:selected").text();
+    if (selected === "None") {
+      $("#insurance-num").hide();
+      $("#insurance-other").hide();
+      $("#medicaid-managed").hide();
+    } else if (selected === "Other (fill in below)") {
+      $("#insurance-num").show();
+      $("#insurance-other").show();
+      $("#medicaid-managed").hide();
+    } else if (selected === "Medicaid Managed Care (fill in name of company below)") {
+      $("#insurance-num").show();
+      $("#insurance-other").hide();
+      $("#medicaid-managed").show();
+    } else {
+      $("#insurance-num").show();
+      $("#insurance-other").hide();
+      $("#medicaid-managed").hide();
+    }
+  });
+
+  // Required field checker for Safari
+  $("form").submit(function(e) {
+    var ref;
+    if (!e.target.checkValidity()) {
+      ref = $(this).find("[required]");
+      $(ref).each(function() {
+        if ($(this).val() === "") {
+          alert("This field cannot be blank:\n" + $(this).prev("label").text());
+          $(this).focus();
+          e.preventDefault();
+          return false;
+        }
+        return true;
+      });
+    }
+  });
 })
 
 // Uncomment to copy all static images under ../images to the output folder and reference

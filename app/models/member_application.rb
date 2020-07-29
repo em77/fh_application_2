@@ -10,7 +10,7 @@ class MemberApplication < ApplicationRecord
                    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
                    "image/jpeg"]
 
-  validates :ssn, format: { with: /^[0-9]{9}$/,
+  validates :ssn, format: { with: /\A[0-9]{9}\z/,
     message: "must be a 9 digit number" }
 
   validates :first_name, :last_name, :dob, :place_of_birth, :age, :ssn, :gender,

@@ -4,6 +4,12 @@
   Tooltip on top
 </button>
 
+normal date
 <%= bootstrap_form_tag do |f| %>
   <%= f.text_field :date, data: { behavior: "flatpickr" } %>
+<% end %>
+<br><br>
+months-only date
+<%= bootstrap_form_tag do |f| %>
+  <%= f.text_field :date_months_only, data: { behavior: "flatpickr-months-only" } %>
 <% end %>
