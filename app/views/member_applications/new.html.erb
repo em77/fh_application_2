@@ -92,7 +92,8 @@
         readonly: true %>
 
       <%= f.text_field :ssn, {label: "SSN", value: params[:ssn],
-          required: true, id: "ssn-field"} %>
+        required: true, id: "ssn-field", pattern: "^[0-9]{9}$",
+        title: "must be a 9 digit number"} %>
 
       <%= f.text_field :gender, label: "Gender", value: params[:gender],
         required: true %>

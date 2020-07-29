@@ -1,4 +1,4 @@
-<h1>Hello</h1>
+<h1>Hello I am a test page</h1>
 
 <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Tooltipping!!">
   Tooltip on top
@@ -12,4 +12,9 @@ normal date
 months-only date
 <%= bootstrap_form_tag do |f| %>
   <%= f.text_field :date_months_only, data: { behavior: "flatpickr-months-only" } %>
+
+  ssn client side pattern matching
+  <%= f.text_field :ssn, label: "SSN", pattern: "^[0-9]{9}$", title: "must be a 9 digit number" %>
+
+  <%= f.submit %>
 <% end %>
