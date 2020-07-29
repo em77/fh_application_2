@@ -1,6 +1,5 @@
-@import "~bootstrap/scss/bootstrap";
-
 // Begin bootstrap_form styles
+@import "~bootstrap/scss/bootstrap";
 
 .rails-bootstrap-forms-date-select select,
 .rails-bootstrap-forms-time-select select,
@@ -12,9 +11,20 @@
 .rails-bootstrap-forms-error-summary {
   margin-top: 10px;
 }
-
 // End bootstrap_form styles
 
 .hide-element {
   display: none;
 }
+
+// Begin flatpickr month select arrow bug avoidance
+.flatpickr-months .flatpickr-prev-month,
+.flatpickr-months .flatpickr-next-month {
+  display: none;
+}
+
+.flatpickr-months .arrowUp,
+.flatpickr-months .arrowDown {
+  opacity: 1;
+}
+// End flatpickr bug avoidance

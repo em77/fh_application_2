@@ -15,7 +15,7 @@ import '../stylesheets/application';
 import moment from 'moment'
 window.moment = moment
 
-// Date picker
+// Date picker - flatpickr
 import flatpickr from 'flatpickr';
 require("flatpickr/dist/flatpickr.css");
 import monthSelect from 'flatpickr/dist/plugins/monthSelect';
@@ -102,7 +102,7 @@ document.addEventListener("turbolinks:load", () => {
     }
   });
 
-  // Required field checker for Safari
+  // Required field checker for old Safari versions
   $("form").submit(function(e) {
     var ref;
     if (!e.target.checkValidity()) {
