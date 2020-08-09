@@ -1,0 +1,753 @@
+<%= bootstrap_form_for(member_application, label_col: "col-lg-1 col-xs-1", multipart: true) do |f| %>
+
+  <div class="panel panel-info">
+    <div class="panel-heading panel-heading-custom">
+      <h4 class="panel-title">Eligibility</h4>
+    </div>
+
+    <div class="panel-content">
+      To be eligible for membership an applicant must:
+      <br>
+      <ol>
+        <li>be interested in attending Fountain House, as membership is
+          voluntary.</li>
+        <li>have a primary presenting problem associated with severe and
+          persistent mental illness.</li>
+        <li>be able to get to Fountain House.</li>
+        <li>not pose a threat to our community.</li>
+        <li>be at least 18 years of age.</li>
+        <br>
+        <p>
+          <em>
+            "The Clubhouse has control over its acceptance of new members"
+            <br>- Standard #2, International Standards for Clubhouse Programs,
+            Clubhouse International
+          </em>
+        </p>
+      </ol>
+      <p>
+        Fountain House does not discriminate on the basis of race, color, religion, sex, age, national origin, veteran status, sexual orientation, gender identity, disability, or any other basis of discrimination prohibited by law.
+      </p>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading panel-heading-custom">
+      <h4 class="panel-title">Attachments</h4>
+    </div>
+
+    <div class="panel-content">
+    <h4 class="required-fields-warning">Required</h4>
+
+      <%= f.file_field :psych_eval, label: sanitize("Please attach a current" +
+        " psychiatric evaluation using the DSM V (#{link_to 'template', 'https://fountainhouse-bucket.s3.amazonaws.com/Psychiatric+Evaluation+Template.docx', target: '_blank'})"), required: true %>
+
+      <%= f.file_field :psych_social, label: sanitize("Please attach a current" +
+        " and detailed psychosocial history (#{link_to 'template', 'https://fountainhouse-bucket.s3.amazonaws.com/Psychosocial+Template.pdf', target: '_blank'})"), required: true %>
+
+      <%= f.file_field :insurance_card,
+        label: "Please attach a current insurance card", required: true %>
+
+      <p><em>Accepted file types: .pdf, .doc, .docx, .jpg</em></p>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading panel-heading-custom">
+      <h4 class="panel-title">Prospective Member</h4>
+    </div>
+
+    <div class="panel-content">
+
+      <%= f.text_field :first_name, label: "First Name", required: true %>
+
+      <%= f.text_field :mi, label: "Middle Initial" %>
+
+      <%= f.text_field :last_name, label: "Last Name", required: true %>
+
+      <%= f.text_field :dob, label: "Date of Birth",
+        required: true, id: "dob-field",
+        data: { behavior: "flatpickr" } %>
+
+      <%= f.text_field :place_of_birth, label: "Place of Birth",
+        required: true %>
+
+      <%= f.text_field :age, label: "Age", required: true, id: "age-field",
+        readonly: true %>
+
+      <%= f.text_field :ssn, {label: "SSN",
+        required: true, id: "ssn-field", pattern: "^[0-9]{9}$",
+        title: "must be a 9 digit number"} %>
+
+      <%= f.text_field :gender, label: "Gender",
+        required: true %>
+
+      <%= f.select :us_citizen, ["No", "Yes"], label: "Are you a U.S. citizen?" %>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading panel-heading-custom">
+      <h4 class="panel-title">Address</h4>
+    </div>
+
+    <div class="panel-content">
+
+      <%= f.text_field :street_address, label: "Street address", required: true %>
+
+      <%= f.text_field :apt, label: "Apartment" %>
+
+      <%= f.text_field :city, label: "City",
+        required: true %>
+
+      <%= f.text_field :state, label: "State",
+        required: true %>
+
+      <%= f.number_field :zip_code, label: "Zip code",
+        required: true %>
+
+      <%= f.phone_field :phone_number, label: "Phone number", required: true %>
+
+      <%= f.text_field :county, label: "County" %>
+
+      <%= f.text_field :residence_time_length,
+        label: "How long have you resided Here?", required: true %>
+
+      <%= f.email_field :email_address, label: "E-mail address" %>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading panel-heading-custom">
+      <h4 class="panel-title">Who is recommending you?</h4>
+    </div>
+
+    <div class="panel-content">
+
+      <%= f.select :recommend_type, [
+          "Self-Referral",
+          "Inpatient",
+          "Outpatient"
+        ],
+        { label: "Select one:" } %>
+
+      <%= f.text_field :recommend_name, label: "Name", required: true %>
+
+      <%= f.text_field :recommend_agency, label: "Source", required: true %>
+
+      <%= f.phone_field :recommend_phone_number, label: "Phone number", required: true %>
+
+      <%= f.text_field :recommend_agency_type, label: "Type of agency" %>
+
+      <%= f.text_field :recommend_known_length,
+        label: "How long have you known this person?",
+        required: true %>
+
+      <%= f.email_field :recommend_email, label: "E-mail address" %>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading panel-heading-custom">
+      <h4 class="panel-title">Fountain House Tour</h4>
+    </div>
+
+    <div class="panel-content">
+      <div class="left-right-container">
+        <%= f.label :tour_fh, ("Have you had a" +
+          " tour of Fountain House?"), class: "position-left" %>
+        <%= f.form_group :tour_fh do %>
+          <div class="position-right">
+            <%= f.radio_button :tour_fh, "No", label: "No",
+              required: true, inline: true %>
+            <%= f.radio_button :tour_fh, "Yes", label: "Yes",
+              required: true, inline: true %>
+          </div>
+        <% end %>
+      </div>
+
+      <%= f.text_field :tour_date, label: "Date of tour", data: { behavior: "flatpickr" } %>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading panel-heading-custom">
+      <h4 class="panel-title">Main Goals</h4>
+    </div>
+
+    <div class="panel-content">
+      <%= f.select :main_goal, [
+          "Community",
+          "Education",
+          "Employment",
+          "Wellness",
+          "Benefits/Resources",
+          "Other"
+        ],
+        { label: "What is your main goal in joining Fountain House?" } %>
+
+      <%= f.text_field :main_goal_other_text, label: "Other" %>
+
+      <%= f.text_field :what_challenges, label: "What challenges or barriers are keeping you from achieving your goals?" %>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading panel-heading-custom">
+      <h4 class="panel-title">Housing</h4>
+    </div>
+
+    <div class="panel-content">
+      <%= f.select :current_housing_type, [
+          "Own Home/Apartment (Non-subsidized)",
+          "Home of Family Member",
+          "Rooming/Boarding House, Hotel",
+          "SRO (Temporary)",
+          "Supported Apartment (Subsidized)",
+         "24 Hour Supervised Housing",
+          "Supportive Apartment",
+          "Supervised Housing (Part-time Supervision)",
+          "Foster Care",
+          "Psychiatric Hospital",
+          "Nursing Home",
+          "Prison/Jail",
+          "Shelter",
+          "Homeless/Undomiciled"
+        ],
+        { label: "Current housing type" } %>
+
+      <%= f.select :live_alone_or_with_others, ["Alone", "With others"],
+        label: "Do you live alone or with others?", include_blank: true %>
+
+      <%= f.text_field :who_live_with,
+        label: "If living with others, with whom?", include_blank: true %>
+
+      <%= f.select :reside_with_minors, ["No", "Yes"],
+        label: "Do minor children reside in your home?" %>
+
+      <div id="acs-select" class="<%= 'hide-element' unless params.dig(:member_application, :acs_involvement) %>">
+        <%= f.select :acs_involvement, ["No", "Yes"],
+          label: ("If so, is there or has there ever been any ACS" +
+          " (Administration for Children's Services) involvement?") %>
+      </div>
+
+      <%= f.select :have_homeless_history, ["No", "Yes"],
+        label: "Do you have a history of homelessness?" %>
+
+      <%= f.text_area :homeless_explanation, label: "If so, please explain" %>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading panel-heading-custom">
+      <h4 class="panel-title">Income</h4>
+      <h5 class="panel-subtext">
+        Enter monthly amounts in any categories that apply
+      </h5>
+    </div>
+
+    <div class="panel-content">
+
+      <%= f.number_field :ssi, label: "SSI", value: (params.dig(:member_application, :ssi) || 0),
+        class: "income-field" %>
+
+      <%= f.number_field :ssdi, label: "SSDI", value: (params.dig(:member_application, :ssdi) || 0),
+        class: "income-field" %>
+
+      <%= f.number_field :wages, label: "Wages", value: (params.dig(:member_application, :wages) || 0),
+        class: "income-field" %>
+
+      <%= f.number_field :family_income, label: "Family/Family Support",
+        value: (params.dig(:member_application, :family_income) || 0), class: "income-field" %>
+
+      <%= f.number_field :snap, label: "SNAP", value: (params.dig(:member_application, :snap) || 0),
+        class: "income-field" %>
+
+      <%= f.number_field :retirement_benefits, label: "Retirement Benefits",
+        value: (params.dig(:member_application, :retirement_benefits) || 0), class: "income-field" %>
+
+      <%= f.number_field :veteran_benefits, label: "Veteran's Benefits",
+        value: (params.dig(:member_application, :veteran_benefits) || 0), class: "income-field" %>
+
+      <%= f.number_field :public_assistance, label: "Public Assistance",
+        value: (params.dig(:member_application, :public_assistance) || 0), class: "income-field" %>
+
+      <%= f.number_field :other_income, label: "Other",
+        value: (params.dig(:member_application, :other_income) || 0), class: "income-field" %>
+
+      <%= f.number_field :total_income, label: "Total Income",
+        value: (params.dig(:member_application, :total_income) || 0), id: "total-field",
+        readonly: true, required: true %>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading panel-heading-custom">
+      <h4 class="panel-title">Ethnicity (check all that apply)</h4>
+    </div>
+
+    <div class="panel-content">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <%= f.form_group do %>
+            <%= f.check_box :eth_cauc, label: "White / European American", inline: true %>
+
+            <%= f.check_box :eth_asian, label: "Asian", inline: true %>
+
+            <%= f.check_box :eth_pi, label: "Pacific Islander / Native Hawaiian", inline: true %>
+
+            <%= f.check_box :eth_na, label: "Native American / American Indian", inline: true %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">Black / African American</div>
+        <div class="panel-body">
+          <%= f.form_group do %>
+            <%= f.check_box :eth_aa, label: "African-American", inline: true %>
+
+            <%= f.check_box :eth_car, label: "Afro-Carribean", inline: true %>
+
+            <%= f.check_box :eth_aa_ac, label: "African Continent", inline: true %>
+
+            <%= f.check_box :eth_aa_other, label: "Other Black", inline: true %>
+
+            <%= f.check_box :eth_aa_unknown, label: "Unknown", inline: true %>
+
+            <%= f.check_box :eth_aa_na, label: "Not Applicable", inline: true %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">Hispanic / Latin American</div>
+        <div class="panel-body">
+          <%= f.form_group do %>
+            <%= f.check_box :eth_cuban, label: "Cuban", inline: true %>
+
+            <%= f.check_box :eth_mex, label: "Mexican", inline: true %>
+
+            <%= f.check_box :eth_pr, label: "Puerto Rican", inline: true %>
+
+            <%= f.check_box :eth_dom, label: "Dominican", inline: true %>
+
+            <%= f.check_box :eth_sa, label: "South American", inline: true %>
+
+            <%= f.check_box :eth_ca, label: "Central American", inline: true %>
+          <% end %>
+        </div>
+      </div>
+
+      <%= f.text_field :eth_other, label: "Other Ethnicity" %>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading panel-heading-custom">
+      <h4 class="panel-title">Demographic Info</h4>
+    </div>
+
+    <div class="panel-content">
+      <%= f.text_field :other_language,
+        label: "Primary language (if other than English)" %>
+
+      <%= f.select :marital_status, [
+          "Single, Never Married",
+          "Married",
+          "Permanent Partner",
+          "Separated",
+          "Divorced",
+          "Widowed"
+        ],
+        label: "Marital Status" %>
+
+      <%= f.select :have_children, ["No", "Yes"], label: "Do you have any children?" %>
+
+      <%= f.text_field :children_number, label: "If yes, how many?" %>
+
+      <%= f.select :are_you_veteran, ["No", "Yes"], label: "Are you a veteran?" %>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading panel-heading-custom">
+      <h4 class="panel-title">Education Level</h4>
+      <h5 class="panel-subtext">(check all that apply)</h5>
+    </div>
+
+    <div class="panel-content">
+      <%= render partial: "education_level", locals: {f: f} %>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading panel-heading-custom">
+      <h4 class="panel-title">Current Community</h4>
+      <h5 class="panel-subtext">How well do each of the following statements represent how you <i>feel</i> about your current community?</h5>
+    </div>
+
+    <div class="panel-content">
+      <%= f.select :get_needs_met, ["Not at all", "Somewhat", "Mostly", "Completely"], label: "I get important needs of mine met by my current community" %>
+
+      <%= f.select :feel_part, ["Not at all", "Somewhat", "Mostly", "Completely"], label: "It is important for me to feel a part of a community" %>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading panel-heading-custom">
+      <h4 class="panel-title">Employment History</h4>
+    </div>
+
+    <div class="panel-content">
+      <%= render partial: "employment_history", locals: {f: f} %>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading panel-heading-custom">
+      <h4 class="panel-title">Medical Alerts</h4>
+      <h5 class="panel-subtext">(check all that apply)</h5>
+    </div>
+
+    <div class="panel-content">
+
+      <%= f.form_group do %>
+        <%= f.check_box :med_alert_deaf, label: "Deaf/Hearing Impairment", inline: true %>
+
+        <%= f.check_box :med_alert_asthma, label: "Asthma", inline: true %>
+
+        <%= f.check_box :med_alert_cpi, label: "Chronic Physical Illness", inline: true %>
+
+        <%= f.check_box :med_alert_allerg, label: "Severe Allergic Reactions", inline: true %>
+
+        <%= f.check_box :med_alert_npm, label: "New Psychiatric Medication", inline: true %>
+
+        <%= f.check_box :med_alert_blind, label: "Blind/Visual Impairment", inline: true %>
+
+        <%= f.check_box :med_alert_recent_surg, label: "Recent Surgery", inline: true %>
+
+        <%= f.check_box :med_alert_diabetes, label: "Diabetes", inline: true %>
+
+        <%= f.check_box :med_alert_ep, label: "Epilepsy/Seizure Disorder", inline: true %>
+
+        <%= f.check_box :med_alert_hyper, label: "Hypertension", inline: true %>
+      <% end %>
+
+      <%= f.text_field :med_alert_other, label: "Other" %>
+
+      <%= f.text_area :med_alert_memo, label: "Alert Memo" %>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading panel-heading-custom">
+      <h4 class="panel-title">Psychiatric/NP Contact</h4>
+    </div>
+
+    <div class="panel-content">
+
+      <%= f.text_field :psych_name, label: "Psychiatrist/NP" %>
+
+      <%= f.text_field :psych_agency, label: "Agency" %>
+
+      <%= f.phone_field :psych_phone, label: "Phone" %>
+
+      <%= f.text_field :psych_address, label: "Address" %>
+
+      <%= f.text_field :psych_seeing_length,
+        label: "How long have you been seeing this psychiatrist?" %>
+
+      <%= f.email_field :psych_email, label: "E-mail" %>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading panel-heading-custom">
+      <h4 class="panel-title">Therapist Contact</h4>
+    </div>
+
+    <div class="panel-content">
+      <%= f.text_field :therapist_name, label: "Therapist" %>
+
+      <%= f.text_field :therapist_agency, label: "Agency" %>
+
+      <%= f.phone_field :therapist_phone, label: "Phone" %>
+
+      <%= f.text_field :therapist_address, label: "Address" %>
+
+      <%= f.text_field :therapist_seeing_length,
+        label: "How long have you been seeing this therapist?" %>
+
+      <%= f.email_field :therapist_email, label: "E-mail" %>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading panel-heading-custom">
+      <h4 class="panel-title">Medical Contact</h4>
+    </div>
+
+    <div class="panel-content">
+      <%= f.text_field :primary_care_name, label: "Primary Care MD" %>
+
+      <%= f.text_field :primary_care_agency, label: "Agency" %>
+
+      <%= f.phone_field :primary_care_phone, label: "Phone" %>
+
+      <%= f.text_field :primary_care_address, label: "Address" %>
+
+      <%= f.email_field :primary_care_email, label: "E-mail" %>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading panel-heading-custom">
+      <h4 class="panel-title">Emergency Contacts</h4>
+    </div>
+
+    <div class="panel-content">
+
+      <%= f.text_field :emerg_primary_name, label: "Primary" %>
+
+      <%= f.phone_field :emerg_primary_phone, label: "Phone" %>
+
+      <%= f.text_field :emerg_primary_relation, label: "Relationship" %>
+
+      <%= f.text_field :emerg_secondary_name, label: "Secondary" %>
+
+      <%= f.phone_field :emerg_secondary_phone, label: "Phone" %>
+
+      <%= f.text_field :emerg_secondary_relation, label: "Relationship" %>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading panel-heading-custom">
+      <h4 class="panel-title">Medical Insurance</h4>
+    </div>
+
+    <div class="panel-content">
+
+      <%= f.select :insurance_name, [
+          "None",
+          "Other (fill in below)",
+          "Straight Medicaid",
+          "Medicare",
+          "Family pays",
+          "Self pay",
+          "Private Insurance",
+          "Veteran's Benefits",
+          "Worker's Compensation",
+          "Medicaid Managed Care (fill in name of company below)"
+        ],
+        label: "Insurance plan" %>
+
+      <div id="insurance-num"
+        class="<%= 'hide-element' unless params.dig(:member_application, :insurance_num) %>">
+        <%= f.text_field :insurance_num, label: "Insurance policy number" %>
+      </div>
+
+      <div id="insurance-other"
+        class="<%= 'hide-element' unless params.dig(:member_application, :insurance_other) %>">
+        <%= f.text_field :insurance_other,
+          label: "If \"Other,\" please elaborate" %>
+      </div>
+
+      <div id="medicaid-managed"
+        class="<%= 'hide-element' unless params.dig(:member_application, :medicaid_comp) %>">
+        <%= f.text_field :medicaid_comp,
+        label: "If Medicaid Managed Care, what is the name of the company?" %>
+      </div>
+
+      <%= f.select :harp, ["No", "Yes", "Unknown"],
+        label: "Health And Recovery Plan (HARP)" %>
+      <%= f.select :hcbs, ["No", "Yes", "Unknown"], label: "HCBS" %>
+
+      <%= f.text_field :last_physical_exam_date,
+        label: "Date of last physical exam", data: { behavior: "flatpickr" } %>
+
+      <%= f.text_field :last_dental_exam_date,
+        label: "Date of last dental exam", data: { behavior: "flatpickr" } %>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading panel-heading-custom">
+      <h4 class="panel-title">Diagnosis</h4>
+    </div>
+    <div class="panel-content">
+      <%= f.text_area :dsm_v, label: "Psychiatric Diagnosis (DSM V)" %>
+    </div>
+  </div>  
+
+  <div class="panel panel-info">
+    <div class="panel-heading panel-heading-custom">
+      <h4 class="panel-title">Medication Information</h4>
+      <h5 class="panel-subtext">Please list all medications you are currently
+        taking with respective names, dosage, and frequency.</h5>
+    </div>
+    <div class="panel-content">
+      <%= render partial: "medication_info", locals: {f: f} %>
+    </div>
+  </div>  
+
+  <div class="panel panel-info">
+    <div class="panel-heading panel-heading-custom">
+      <h4 class="panel-title">Psychiatric Hospitalizations</h4>
+      <h5 class="panel-subtext">Please list all hospitalizations beginning with
+        the first. Be sure to indicate the most recent.</h5>
+    </div>
+    <div class="panel-content">
+      <%= f.number_field :hospitalization_count,
+        label: "Total # of Hospitalizations", id: "hosp-count",
+        required: true %>
+    </div>
+    <%= render partial: "hospitalization_list", locals: {f: f} %>
+    <h5></h5>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading panel-heading-custom">
+      <h4 class="panel-title">Substance Abuse History</h4>
+    </div>
+
+    <div class="panel-content">
+
+      <%= f.select :abuse_history_alcohol, ["No", "Yes"],
+        label: "Do you have a history of alcohol abuse?", include_blank: true %>
+
+      <%= f.select :abuse_history_drugs, ["No", "Yes"],
+        label: "Do you have a history of drug abuse?", include_blank: true %>
+
+      <%= f.text_area :abuse_history_elaboration,
+        label: "If an alcohol or substance abuse history exists," +
+        " please elaborate" %>
+
+      <%= f.select :ever_in_treatment, ["No", "Yes"],
+        label: "Have you ever been in treatment for an alcohol or drug" +
+        " problem?",
+        include_blank: true %>
+
+      <%= f.text_field :past_treatment_when_and_where,
+        label: "If so, when and where?" %>
+
+      <%= f.select :currently_in_treatment, ["No", "Yes"],
+        label: ("Are you currently in treatment or in a support group for" +
+          " alcohol or drug abuse?"), include_blank: true %>
+
+      <%= f.text_field :current_treatment_when_and_where,
+        label: "If so, when and where?" %>
+
+      <%= f.select :interested_in_treatment, ["No", "Yes"],
+        label: ("Are you interested in being in treatment or a support group" +
+        " for alcohol or drug abuse?"), include_blank: true %>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading panel-heading-custom">
+      <h4 class="panel-title">Legal History</h4>
+    </div>
+
+    <div class="panel-content">
+      <%= render partial: "legal_history", locals: {f: f} %>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading panel-heading-custom">
+      <h4 class="panel-title">CAGE-AID Questionnaire</h4>
+      <h5 class="panel-subtext">
+        The following is a questionnaire, required
+        by one of our funding sources. Please note that your answers to these
+        questions do not affect your acceptance to Fountain House.<br><br>When
+        thinking about drug use, include drug use and use of prescription drug
+        use other than prescribed.
+      </h5>
+    </div>
+
+    <div class="panel-content" id="cage-aid">
+      <%= render partial: "cage_aid", locals: {f: f} %>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading panel-heading-custom">
+      <h4 class="panel-title">Current Support</h4>
+    </div>
+
+    <div class="panel-content">
+      <h5>Let us know what types of support you are receiving currently</h5>
+
+      <%= f.form_group do %>
+        <%= f.check_box :sub_abuse_check, label: "Substance Abuse Program", inline: true %>
+
+        <%= f.check_box :work_prog_check, label: "Work Program", inline: true %>
+
+        <%= f.check_box :acces_vr_check, label: "Acces-VR", inline: true %>
+
+        <%= f.check_box :edu_sup_check, label: "Education Support", inline: true %>
+
+        <%= f.check_box :act_team_check, label: "ACT Team", inline: true %>
+      <% end %>
+
+      <%= f.text_field :other_sup_text, label: "Other" %>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading panel-heading-custom">
+      <h4 class="panel-title">Signature</h4>
+    </div>
+
+    <div class="panel-content">
+      <div class="left-right-container">
+        <%= f.label :bronx_or_manhattan, ("Are you applying" +
+          " to Fountain House Manhattan or Fountain House Bronx?"),
+          class: "position-left" %>
+        <%= f.form_group :bronx_or_manhattan do %>
+          <div class="position-right">
+            <%= f.radio_button :bronx_or_manhattan, "Manhattan",
+              label: "Manhattan", required: true,
+              inline: true %>
+            <%= f.radio_button :bronx_or_manhattan, "Bronx", label: "Bronx",
+              required: true,
+              inline: true %>
+          </div>
+        <% end %>
+      </div>
+
+      <%= f.text_field :member_signature, label: ("Please sign your name to" +
+        " this application by typing it in below (Member)"), required: true %>
+
+      <%= f.text_field :referral_signature, label: ("Please sign your name to" +
+        " this application by typing it in below (Referral)"), required: true %>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading panel-heading-custom">
+      <h4 class="panel-title">Application Submission</h4>
+    </div>
+
+    <div class="panel-content">
+      <h4>
+        It is very important that all components of this application are
+        absolutely complete. Any missing or incomplete components will,
+        unfortunately, delay the application process.
+        <br><br>
+        Please allow the Membership Team approximately two weeks to review
+        applications.
+        <br>
+        Please contact the Membership Office at (212) 582-0340
+        x240 with any questions. Thank you for applying to Fountain House.
+      </h4>
+      <br>
+      <%= f.form_group do %>
+        <%= f.submit "Submit Application", class: "btn btn-default btn-primary",
+          id: "submit_app" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

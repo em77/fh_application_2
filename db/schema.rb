@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2020_07_13_213740) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "member_applications", force: :cascade do |t|
+  create_table "member_applications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "ssn"
     t.string "first_name"
     t.string "last_name"

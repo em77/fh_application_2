@@ -1,6 +1,6 @@
 class CreateMemberApplications < ActiveRecord::Migration[6.0]
   def change
-    create_table :member_applications do |t|
+    create_table :member_applications, id: :uuid do |t|
       [
         :ssn, :first_name, :last_name, :mi, :dob, :age,
         :gender, :street_address, :apt, :city, :state, :zip_code,
