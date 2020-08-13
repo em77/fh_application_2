@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_13_213740) do
+ActiveRecord::Schema.define(version: 2020_08_12_175938) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -258,7 +258,7 @@ ActiveRecord::Schema.define(version: 2020_07_13_213740) do
     t.integer "acces_vr_check"
     t.integer "edu_sup_check"
     t.integer "act_team_check"
-    t.integer "application_status"
+    t.integer "application_status", default: 0
     t.date "tour_date"
     t.date "work_start_date_1"
     t.date "work_end_date_1"

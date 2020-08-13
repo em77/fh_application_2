@@ -28,3 +28,11 @@
   opacity: 1;
 }
 // End flatpickr bug avoidance
+
+body {
+  padding-top: 75px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 20px;
+  overflow: scroll;
+}

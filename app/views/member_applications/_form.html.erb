@@ -1,4 +1,5 @@
-<%= bootstrap_form_for(member_application, label_col: "col-lg-1 col-xs-1", multipart: true) do |f| %>
+<%= bootstrap_form_for(member_application, label_col: "col-lg-1 col-xs-1",
+  id:"application-form", multipart: true) do |f| %>
 
   <div class="panel panel-info">
     <div class="panel-heading panel-heading-custom">
@@ -31,7 +32,7 @@
     </div>
   </div>
 
-  <div class="panel panel-info">
+  <div class="panel panel-info" id="attachments-section">
     <div class="panel-heading panel-heading-custom">
       <h4 class="panel-title">Attachments</h4>
     </div>
@@ -248,35 +249,35 @@
 
     <div class="panel-content">
 
-      <%= f.number_field :ssi, label: "SSI", value: (params.dig(:member_application, :ssi) || 0),
+      <%= f.number_field :ssi, label: "SSI", value: (params.dig(:member_application, :ssi) || member_application.ssi || 0),
         class: "income-field" %>
 
-      <%= f.number_field :ssdi, label: "SSDI", value: (params.dig(:member_application, :ssdi) || 0),
+      <%= f.number_field :ssdi, label: "SSDI", value: (params.dig(:member_application, :ssdi) || member_application.ssdi || 0),
         class: "income-field" %>
 
-      <%= f.number_field :wages, label: "Wages", value: (params.dig(:member_application, :wages) || 0),
+      <%= f.number_field :wages, label: "Wages", value: (params.dig(:member_application, :wages) || member_application.wages || 0),
         class: "income-field" %>
 
       <%= f.number_field :family_income, label: "Family/Family Support",
-        value: (params.dig(:member_application, :family_income) || 0), class: "income-field" %>
+        value: (params.dig(:member_application, :family_income) || member_application.family_income || 0), class: "income-field" %>
 
-      <%= f.number_field :snap, label: "SNAP", value: (params.dig(:member_application, :snap) || 0),
+      <%= f.number_field :snap, label: "SNAP", value: (params.dig(:member_application, :snap) || member_application.snap || 0),
         class: "income-field" %>
 
       <%= f.number_field :retirement_benefits, label: "Retirement Benefits",
-        value: (params.dig(:member_application, :retirement_benefits) || 0), class: "income-field" %>
+        value: (params.dig(:member_application, :retirement_benefits) || member_application.retirement_benefits || 0), class: "income-field" %>
 
       <%= f.number_field :veteran_benefits, label: "Veteran's Benefits",
-        value: (params.dig(:member_application, :veteran_benefits) || 0), class: "income-field" %>
+        value: (params.dig(:member_application, :veteran_benefits) || member_application.veteran_benefits || 0), class: "income-field" %>
 
       <%= f.number_field :public_assistance, label: "Public Assistance",
-        value: (params.dig(:member_application, :public_assistance) || 0), class: "income-field" %>
+        value: (params.dig(:member_application, :public_assistance) || member_application.public_assistance || 0), class: "income-field" %>
 
       <%= f.number_field :other_income, label: "Other",
-        value: (params.dig(:member_application, :other_income) || 0), class: "income-field" %>
+        value: (params.dig(:member_application, :other_income) || member_application.other_income || 0), class: "income-field" %>
 
       <%= f.number_field :total_income, label: "Total Income",
-        value: (params.dig(:member_application, :total_income) || 0), id: "total-field",
+        value: (params.dig(:member_application, :total_income) || member_application.total_income || 0), id: "total-field",
         readonly: true, required: true %>
     </div>
   </div>

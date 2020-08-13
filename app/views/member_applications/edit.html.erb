@@ -1,15 +1,9 @@
 <% provide(:title, "Edit Membership Application Form") %>
 
-<div id="logo-title-container">
-  <div id="fh-logo-app">
-  <%= link_to image_tag("https://s3.amazonaws.com/fountainhouse-bucket/fountain_house_logo2.jpg", alt: "Fountain House"), "http://www.fountainhouse.org/", target: "_blank" %>
-  </div>
+<nav class="navbar fixed-top navbar-light bg-light" id="save-draft-button_edit-view">
+  <button type="button" class="btn btn-success">Save Draft</button>
+</nav>
 
-  <div id="app-title">
-    <h1>
-      Edit Membership Application Form
-    </h1>
-  </div>
-</div>
+<%= render partial: 'header' %>
 
 <%= render partial: 'form', locals: { member_application: member_application } %>

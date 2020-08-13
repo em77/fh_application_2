@@ -118,6 +118,22 @@ document.addEventListener("turbolinks:load", () => {
       });
     }
   });
+
+  // Remove all "required" attributes on fields, remove entire attachments section
+  // and submit form on "Save Draft" button click
+  $("#save-draft-button_edit-view").on("click", function() {
+    $("#attachments-section").remove();
+
+    function removeRequired(element) {
+      $(element).prop("required", false);
+    }
+
+    for (const element of $("form")[0].elements) {
+      removeRequired(element);
+    }
+
+    $("form")[0].submit();
+  });
 })
 
 // Uncomment to copy all static images under ../images to the output folder and reference
