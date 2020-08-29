@@ -17,18 +17,6 @@
   display: none;
 }
 
-// Begin flatpickr month select arrow bug avoidance
-.flatpickr-months .flatpickr-prev-month,
-.flatpickr-months .flatpickr-next-month {
-  display: none;
-}
-
-.flatpickr-months .arrowUp,
-.flatpickr-months .arrowDown {
-  opacity: 1;
-}
-// End flatpickr bug avoidance
-
 body {
   padding-top: 75px;
   padding-left: 5px;

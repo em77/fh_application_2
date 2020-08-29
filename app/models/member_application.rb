@@ -15,7 +15,7 @@ class MemberApplication < ApplicationRecord
   validates :ssn, format: { with: /\A[0-9]{9}\z/,
     message: "must be a 9 digit number" }, unless: :is_draft?
 
-  validates :first_name, :last_name, :dob, :place_of_birth, :age, :ssn, :gender,
+  validates :first_name, :last_name, :dob, :age, :ssn, :gender,
     :street_address, :city, :state, :zip_code, :phone_number,
     :residence_time_length, :recommend_name, :recommend_agency,
     :recommend_phone_number, :recommend_known_length, :tour_fh, :total_income,
@@ -26,5 +26,15 @@ class MemberApplication < ApplicationRecord
 
   def is_draft?
     self.draft?
+  end
+
+  def finalize!
+    submitted!
+    today = Time.current.in_time_zone("Eastern Time (US & Canada)").to_date
+    self.update(
+      referral_signature_date: today,
+      member_signature_date: today,
+      application_expiration_date: today + 60.days
+    )
   end
 end

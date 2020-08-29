@@ -7,13 +7,13 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 
-require("jquery")
+require("jquery");
 
 import 'bootstrap';
 import '../stylesheets/application';
 
-import moment from 'moment'
-window.moment = moment
+import moment from 'moment';
+window.moment = moment;
 
 // Date picker - flatpickr
 import flatpickr from 'flatpickr';
@@ -30,14 +30,7 @@ document.addEventListener("turbolinks:load", () => {
     altInput: true,
     altFormat: "F j, Y",
     dateFormat: "Y-m-d"
-  })
-
-  flatpickr("[data-behavior='flatpickr-months-only']", {
-    altInput: true,
-    plugins: [
-      new monthSelect()
-    ]
-  })
+  });
 
   bsCustomFileInput.init();
 

@@ -45,3 +45,5 @@ yarn-debug.log*
 .DS_Store
 .AppleDouble
 .LSOverride
+
+/config/credentials/development.key

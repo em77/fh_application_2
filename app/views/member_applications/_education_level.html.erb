@@ -1,5 +1,5 @@
 <%= f.form_group do %>
-  <%= f.check_box :less_hs, label: "Less than High School", inline: true %>
+  <%= f.check_box :less_hs, label: "None", inline: true %>
 
   <%= f.check_box :some_hs, label: "Some High School", inline: true %>
 
@@ -22,80 +22,3 @@
 
   <%= f.check_box :adv_grad_degree, label: "Advanced Graduate Degree", inline: true %>
 <% end %>
-
-<div class="form-inline">
-  <div class="col-lg-3 col-xs-3 row_element">
-    <strong>School Attended</strong>
-  </div>
-
-  <div class="col-lg-3 col-xs-3 row_element">
-    <strong>Years</strong>
-  </div>
-
-  <div class="col-lg-3 col-xs-3 row_element">
-    <strong>Major</strong>
-  </div>
-
-  <div class="col-lg-3 col-xs-3 row_element">
-    <strong>Did you Graduate?</strong>
-  </div>
-</div>
-
-<div class="form-inline">
-  <div class="col-lg-3 col-xs-3 row_element">
-    <%= f.text_field :school_attended_1,
-      hide_label: true, control_col: "col-lg-12", class: "row_field" %>
-  </div>
-  <div class="col-lg-3 col-xs-3 row_element">
-    <%= f.text_field :school_years_1,
-      hide_label: true, control_col: "col-lg-12", class: "row_field" %>
-  </div>
-  <div class="col-lg-3 col-xs-3 row_element">
-    <%= f.text_field :major_1,
-      hide_label: true, control_col: "col-lg-12", class: "row_field" %>
-  </div>
-  <div class="col-lg-3 col-xs-3 row_element">
-    <%= f.text_field :graduate_1,
-      hide_label: true, control_col: "col-lg-12", class: "row_field" %>
-  </div>
-</div>
-
-<div class="form-inline">
-  <div class="col-lg-3 col-xs-3 row_element">
-    <%= f.text_field :school_attended_2,
-      hide_label: true, control_col: "col-lg-12", class: "row_field" %>
-  </div>
-  <div class="col-lg-3 col-xs-3 row_element">
-    <%= f.text_field :school_years_2,
-      hide_label: true, control_col: "col-lg-12", class: "row_field" %>
-  </div>
-  <div class="col-lg-3 col-xs-3 row_element">
-    <%= f.text_field :major_2,  hide_label: true,
-      control_col: "col-lg-12", class: "row_field" %>
-  </div>
-  <div class="col-lg-3 col-xs-3 row_element">
-    <%= f.text_field :graduate_2,
-      hide_label: true, control_col: "col-lg-12", class: "row_field" %>
-  </div>
-</div>
-
-<div class="form-inline">
-  <div class="col-lg-3 col-xs-3 row_element">
-    <%= f.text_field :school_attended_3,
-      hide_label: true, control_col: "col-lg-12", class: "row_field" %>
-  </div>
-  <div class="col-lg-3 col-xs-3 row_element">
-    <%= f.text_field :school_years_3,
-      hide_label: true, control_col: "col-lg-12", class: "row_field" %>
-  </div>
-  <div class="col-lg-3 col-xs-3 row_element">
-    <%= f.text_field :major_3,  hide_label: true,
-      control_col: "col-lg-12", class: "row_field" %>
-  </div>
-  <div class="col-lg-3 col-xs-3 row_element">
-    <%= f.text_field :graduate_3,
-      hide_label: true, control_col: "col-lg-12", class: "row_field" %>
-  </div>
-</div>
-
-<h6 style="visibility: hidden;">test</h6>

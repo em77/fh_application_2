@@ -32,26 +32,7 @@
     </div>
   </div>
 
-  <div class="panel panel-info" id="attachments-section">
-    <div class="panel-heading panel-heading-custom">
-      <h4 class="panel-title">Attachments</h4>
-    </div>
-
-    <div class="panel-content">
-    <h4 class="required-fields-warning">Required</h4>
-
-      <%= f.file_field :psych_eval, label: sanitize("Please attach a current" +
-        " psychiatric evaluation using the DSM V (#{link_to 'template', 'https://fountainhouse-bucket.s3.amazonaws.com/Psychiatric+Evaluation+Template.docx', target: '_blank'})"), required: true %>
-
-      <%= f.file_field :psych_social, label: sanitize("Please attach a current" +
-        " and detailed psychosocial history (#{link_to 'template', 'https://fountainhouse-bucket.s3.amazonaws.com/Psychosocial+Template.pdf', target: '_blank'})"), required: true %>
-
-      <%= f.file_field :insurance_card,
-        label: "Please attach a current insurance card", required: true %>
-
-      <p><em>Accepted file types: .pdf, .doc, .docx, .jpg</em></p>
-    </div>
-  </div>
+  <%= render partial: "attachments", locals: { f: f, member_application: member_application } %>
 
   <div class="panel panel-info">
     <div class="panel-heading panel-heading-custom">
@@ -70,9 +51,6 @@
         required: true, id: "dob-field",
         data: { behavior: "flatpickr" } %>
 
-      <%= f.text_field :place_of_birth, label: "Place of Birth",
-        required: true %>
-
       <%= f.text_field :age, label: "Age", required: true, id: "age-field",
         readonly: true %>
 
@@ -82,8 +60,6 @@
 
       <%= f.text_field :gender, label: "Gender",
         required: true %>
-
-      <%= f.select :us_citizen, ["No", "Yes"], label: "Are you a U.S. citizen?" %>
     </div>
   </div>
 
@@ -114,6 +90,8 @@
       <%= f.text_field :residence_time_length,
         label: "How long have you resided Here?", required: true %>
 
+      <%= f.text_field :housing_agency_program_name, label: "If you live in a housing program, what is the agency of that program?" %>
+
       <%= f.email_field :email_address, label: "E-mail address" %>
     </div>
   </div>
@@ -124,17 +102,9 @@
     </div>
 
     <div class="panel-content">
-
-      <%= f.select :recommend_type, [
-          "Self-Referral",
-          "Inpatient",
-          "Outpatient"
-        ],
-        { label: "Select one:" } %>
-
       <%= f.text_field :recommend_name, label: "Name", required: true %>
 
-      <%= f.text_field :recommend_agency, label: "Source", required: true %>
+      <%= f.text_field :recommend_agency, label: "Agency Name", required: true %>
 
       <%= f.phone_field :recommend_phone_number, label: "Phone number", required: true %>
 
@@ -179,6 +149,7 @@
     <div class="panel-content">
       <%= f.select :main_goal, [
           "Community",
+          "Socialize/Friends",
           "Education",
           "Employment",
           "Wellness",
@@ -189,7 +160,9 @@
 
       <%= f.text_field :main_goal_other_text, label: "Other" %>
 
-      <%= f.text_field :what_challenges, label: "What challenges or barriers are keeping you from achieving your goals?" %>
+      <%= f.text_area :why_fh_good_place, label: "Why would Fountain House be a good place for you?" %>
+
+      <%= f.text_area :what_challenges, label: "What challenges or barriers are keeping you from achieving your goals?" %>
     </div>
   </div>
 
@@ -202,16 +175,11 @@
       <%= f.select :current_housing_type, [
           "Own Home/Apartment (Non-subsidized)",
           "Home of Family Member",
-          "Rooming/Boarding House, Hotel",
-          "SRO (Temporary)",
+          "SRO",
           "Supported Apartment (Subsidized)",
-         "24 Hour Supervised Housing",
+          "24 Hour Supervised Housing",
           "Supportive Apartment",
-          "Supervised Housing (Part-time Supervision)",
-          "Foster Care",
-          "Psychiatric Hospital",
           "Nursing Home",
-          "Prison/Jail",
           "Shelter",
           "Homeless/Undomiciled"
         ],
@@ -223,6 +191,11 @@
       <%= f.text_field :who_live_with,
         label: "If living with others, with whom?", include_blank: true %>
 
+      <%= f.select :have_homeless_history, ["No", "Yes"],
+        label: "Do you have a history of homelessness?" %>
+
+      <%= f.text_area :homeless_explanation, label: "If so, please explain" %>
+
       <%= f.select :reside_with_minors, ["No", "Yes"],
         label: "Do minor children reside in your home?" %>
 
@@ -231,11 +204,6 @@
           label: ("If so, is there or has there ever been any ACS" +
           " (Administration for Children's Services) involvement?") %>
       </div>
-
-      <%= f.select :have_homeless_history, ["No", "Yes"],
-        label: "Do you have a history of homelessness?" %>
-
-      <%= f.text_area :homeless_explanation, label: "If so, please explain" %>
     </div>
   </div>
 
@@ -291,56 +259,48 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <%= f.form_group do %>
-            <%= f.check_box :eth_cauc, label: "White / European American", inline: true %>
+            <%= f.check_box :eth_aa, label: "Black (African-American)", inline: true %>
 
-            <%= f.check_box :eth_asian, label: "Asian", inline: true %>
+            <%= f.check_box :eth_aa_carrib, label: "Black (Afro-Carribean)", inline: true %>
+
+            <%= f.check_box :eth_aa_ac, label: "Black (African Continent)", inline: true %>
+
+            <%= f.check_box :eth_black_other, label: "Black (Other)", inline: true %>
+
+            <%= f.check_box :eth_cuban, label: "Hispanic (Cuban)", inline: true %>
+
+            <%= f.check_box :eth_mex, label: "Hispanic (Mexican)", inline: true %>
+
+            <%= f.check_box :eth_pr, label: "Hispanic (Puerto Rican)", inline: true %>
+
+            <%= f.check_box :eth_dom, label: "Hispanic (Dominican)", inline: true %>
+
+            <%= f.check_box :eth_sa, label: "Hispanic (South American)", inline: true %>
+
+            <%= f.check_box :eth_ca, label: "Hispanic (Central American)", inline: true %>
 
             <%= f.check_box :eth_pi, label: "Pacific Islander / Native Hawaiian", inline: true %>
 
             <%= f.check_box :eth_na, label: "Native American / American Indian", inline: true %>
+
+            <%= f.check_box :eth_asian_fe, label: "Asian (Far East)", inline: true %>
+
+            <%= f.check_box :eth_asian_se, label: "Asian (South East)", inline: true %>
+
+            <%= f.check_box :eth_asian_is, label: "Asian (Indian subcontinent)", inline: true %>
+
+            <%= f.check_box :eth_white_na, label: "White (North African)", inline: true %>
+
+            <%= f.check_box :eth_white_me, label: "White (Middle Eastern)", inline: true %>
+
+            <%= f.check_box :eth_white_amer, label: "White (American)", inline: true %>
+
+            <%= f.check_box :eth_white_eu, label: "White (European)", inline: true %>
+
+            <%= f.check_box :eth_white_other, label: "White (Other)", inline: true %>
           <% end %>
         </div>
       </div>
-
-      <div class="panel panel-default">
-        <div class="panel-heading">Black / African American</div>
-        <div class="panel-body">
-          <%= f.form_group do %>
-            <%= f.check_box :eth_aa, label: "African-American", inline: true %>
-
-            <%= f.check_box :eth_car, label: "Afro-Carribean", inline: true %>
-
-            <%= f.check_box :eth_aa_ac, label: "African Continent", inline: true %>
-
-            <%= f.check_box :eth_aa_other, label: "Other Black", inline: true %>
-
-            <%= f.check_box :eth_aa_unknown, label: "Unknown", inline: true %>
-
-            <%= f.check_box :eth_aa_na, label: "Not Applicable", inline: true %>
-          <% end %>
-        </div>
-      </div>
-
-      <div class="panel panel-default">
-        <div class="panel-heading">Hispanic / Latin American</div>
-        <div class="panel-body">
-          <%= f.form_group do %>
-            <%= f.check_box :eth_cuban, label: "Cuban", inline: true %>
-
-            <%= f.check_box :eth_mex, label: "Mexican", inline: true %>
-
-            <%= f.check_box :eth_pr, label: "Puerto Rican", inline: true %>
-
-            <%= f.check_box :eth_dom, label: "Dominican", inline: true %>
-
-            <%= f.check_box :eth_sa, label: "South American", inline: true %>
-
-            <%= f.check_box :eth_ca, label: "Central American", inline: true %>
-          <% end %>
-        </div>
-      </div>
-
-      <%= f.text_field :eth_other, label: "Other Ethnicity" %>
     </div>
   </div>
 
@@ -368,6 +328,8 @@
       <%= f.text_field :children_number, label: "If yes, how many?" %>
 
       <%= f.select :are_you_veteran, ["No", "Yes"], label: "Are you a veteran?" %>
+
+      <%= f.select :us_citizen, ["No", "Yes"], label: "Are you a U.S. citizen?" %>
     </div>
   </div>
 
@@ -509,17 +471,17 @@
 
     <div class="panel-content">
 
-      <%= f.text_field :emerg_primary_name, label: "Primary" %>
+      <%= f.text_field :emerg_primary_name, label: "Name (Primary)" %>
 
-      <%= f.phone_field :emerg_primary_phone, label: "Phone" %>
+      <%= f.phone_field :emerg_primary_phone, label: "Phone (Primary)" %>
 
-      <%= f.text_field :emerg_primary_relation, label: "Relationship" %>
+      <%= f.text_field :emerg_primary_relation, label: "Relationship (Primary)" %>
 
-      <%= f.text_field :emerg_secondary_name, label: "Secondary" %>
+      <%= f.text_field :emerg_secondary_name, label: "Name (Secondary)" %>
 
-      <%= f.phone_field :emerg_secondary_phone, label: "Phone" %>
+      <%= f.phone_field :emerg_secondary_phone, label: "Phone (Secondary)" %>
 
-      <%= f.text_field :emerg_secondary_relation, label: "Relationship" %>
+      <%= f.text_field :emerg_secondary_relation, label: "Relationship (Secondary)" %>
     </div>
   </div>
 
@@ -563,7 +525,7 @@
 
       <%= f.select :harp, ["No", "Yes", "Unknown"],
         label: "Health And Recovery Plan (HARP)" %>
-      <%= f.select :hcbs, ["No", "Yes", "Unknown"], label: "HCBS" %>
+      <%= f.select :hcbs, ["No", "Yes", "Unknown"], label: "Home and Community Based Services (HCBS)" %>
 
       <%= f.text_field :last_physical_exam_date,
         label: "Date of last physical exam", data: { behavior: "flatpickr" } %>
@@ -596,16 +558,64 @@
   <div class="panel panel-info">
     <div class="panel-heading panel-heading-custom">
       <h4 class="panel-title">Psychiatric Hospitalizations</h4>
-      <h5 class="panel-subtext">Please list all hospitalizations beginning with
-        the first. Be sure to indicate the most recent.</h5>
+      <h5 class="panel-subtext">Please list your first and most recent hospitalization, indicating the name of hospital and dates.</h5>
     </div>
     <div class="panel-content">
       <%= f.number_field :hospitalization_count,
-        label: "Total # of Hospitalizations", id: "hosp-count",
+        label: "Total Number of Psychiatric Inpatient Hospitalizations", id: "hosp-count",
         required: true %>
     </div>
-    <%= render partial: "hospitalization_list", locals: {f: f} %>
-    <h5></h5>
+    <div class="col-lg-11 col-xs-11">
+      <div class="row">
+        <div class="col-lg-4 col-xs-4 row_element">
+          <%= f.text_field :hospital_first_name, hide_label: true,
+            control_col: "col-lg-12", class: "row_field",
+            placeholder: "First Hospital Name" %>
+        </div>
+
+        <div class="col-lg-4 col-xs-4 row_element">
+          <%= f.text_field :hospital_first_start_date, hide_label: true,
+            control_col: "col-lg-12",
+            class: "row_field",
+            data: { behavior: "flatpickr" },
+            placeholder: "First Hospitalization Start Date" %>
+        </div>
+
+        <div class="col-lg-4 col-xs-4 row_element">
+          <%= f.text_field :hospital_first_end_date, hide_label: true,
+            control_col: "col-lg-12",
+            class: "row_field",
+            data: { behavior: "flatpickr" },
+            placeholder: "First Hospitalization End Date" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-11 col-xs-11">
+      <div class="row">
+        <div class="col-lg-4 col-xs-4 row_element">
+          <%= f.text_field :hospital_recent_name, hide_label: true,
+            control_col: "col-lg-12", class: "row_field",
+            placeholder: "Most Recent Hospital Name" %>
+        </div>
+
+        <div class="col-lg-4 col-xs-4 row_element">
+          <%= f.text_field :hospital_recent_start_date, hide_label: true,
+            control_col: "col-lg-12",
+            class: "row_field",
+            data: { behavior: "flatpickr" },
+            placeholder: "Most Recent Hospitalization Start Date" %>
+        </div>
+
+        <div class="col-lg-4 col-xs-4 row_element">
+          <%= f.text_field :hospital_recent_end_date, hide_label: true,
+            control_col: "col-lg-12",
+            class: "row_field",
+            data: { behavior: "flatpickr" },
+            placeholder: "Most Recent Hospitalization End Date" %>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="panel panel-info">
@@ -614,16 +624,17 @@
     </div>
 
     <div class="panel-content">
+      <%= f.select :currently_tobacco, ["No", "Yes"],
+        label: "Do you currently smoke tobacco or use tobacco products?", include_blank: true %>
+
+      <%= f.select :history_tobacco, ["No", "Yes"],
+        label: "Do you have a history of smoking or using tobacco products?", include_blank: true %>
 
       <%= f.select :abuse_history_alcohol, ["No", "Yes"],
         label: "Do you have a history of alcohol abuse?", include_blank: true %>
 
       <%= f.select :abuse_history_drugs, ["No", "Yes"],
         label: "Do you have a history of drug abuse?", include_blank: true %>
-
-      <%= f.text_area :abuse_history_elaboration,
-        label: "If an alcohol or substance abuse history exists," +
-        " please elaborate" %>
 
       <%= f.select :ever_in_treatment, ["No", "Yes"],
         label: "Have you ever been in treatment for an alcohol or drug" +
@@ -658,42 +669,44 @@
 
   <div class="panel panel-info">
     <div class="panel-heading panel-heading-custom">
-      <h4 class="panel-title">CAGE-AID Questionnaire</h4>
-      <h5 class="panel-subtext">
-        The following is a questionnaire, required
-        by one of our funding sources. Please note that your answers to these
-        questions do not affect your acceptance to Fountain House.<br><br>When
-        thinking about drug use, include drug use and use of prescription drug
-        use other than prescribed.
-      </h5>
-    </div>
-
-    <div class="panel-content" id="cage-aid">
-      <%= render partial: "cage_aid", locals: {f: f} %>
-    </div>
-  </div>
-
-  <div class="panel panel-info">
-    <div class="panel-heading panel-heading-custom">
-      <h4 class="panel-title">Current Support</h4>
+      <h4 class="panel-title">Questionnaires</h4>
+      <h5 class="panel-subtext">The following are two surveys and a questionnaire. They are required by one of our funding sources. Please note that your answers to these questions do not affect your acceptance to Fountain House.</h5>
     </div>
 
     <div class="panel-content">
-      <h5>Let us know what types of support you are receiving currently</h5>
+      <p>Please answer the following questions:</p>
+      <br>
+      <%= f.select :get_needs_met, ["Not at all", "Somewhat", "Mostly", "Completely"], label: "I get important needs of mine met by my current community" %>
 
-      <%= f.form_group do %>
-        <%= f.check_box :sub_abuse_check, label: "Substance Abuse Program", inline: true %>
+      <%= f.select :feel_part, ["Not at all", "Somewhat", "Mostly", "Completely"], label: "It is important for me to feel a part of a community" %>
+    
+      <%= f.select :lack_companion, ["Hardly ever", "Some of the time", "Mostly", "Completely"], label: "How often do you feel that you lack companionship?" %>
 
-        <%= f.check_box :work_prog_check, label: "Work Program", inline: true %>
+      <%= f.select :left_out, ["Hardly ever", "Some of the time", "Mostly", "Completely"], label: "How often do you feel left out?" %>
 
-        <%= f.check_box :acces_vr_check, label: "Acces-VR", inline: true %>
+      <%= f.select :feel_isolated, ["Hardly ever", "Some of the time", "Mostly", "Completely"], label: "How often do you feel isolated from others?" %>
+    
+      <p>Taking everything into consideration, during the past week how satisfied have you been with your...</p>
+      <br>
+      <%= f.select :satisfaction_physical_health, ["Very poor", "Poor", "Fair", "Good", "Very good"], label: "...physical health?" %>
+      <%= f.select :satisfaction_mood, ["Very poor", "Poor", "Fair", "Good", "Very good"], label: "...mood?" %>
+      <%= f.select :satisfaction_work, ["Very poor", "Poor", "Fair", "Good", "Very good"], label: "...work?" %>
+      <%= f.select :satisfaction_household, ["Very poor", "Poor", "Fair", "Good", "Very good"], label: "...household activities?" %>
+      <%= f.select :satisfaction_social, ["Very poor", "Poor", "Fair", "Good", "Very good"], label: "...social relationships?" %>
+      <%= f.select :satisfaction_family, ["Very poor", "Poor", "Fair", "Good", "Very good"], label: "...family relationships?" %>
+      <%= f.select :satisfaction_leisure, ["Very poor", "Poor", "Fair", "Good", "Very good"], label: "...leisure time activities?" %>
+      <%= f.select :satisfaction_function, ["Very poor", "Poor", "Fair", "Good", "Very good"], label: "...ability to function in daily life?" %>
+      <%= f.select :satisfaction_economic, ["Very poor", "Poor", "Fair", "Good", "Very good"], label: "...economic status?" %>
+      <%= f.select :satisfaction_living_sit, ["Very poor", "Poor", "Fair", "Good", "Very good"], label: "...living/housing situation?" %>
+      <%= f.select :satisfaction_get_around, ["Very poor", "Poor", "Fair", "Good", "Very good"], label: "...ability to get around physically without feeling dizzy, unsteady, or falling?" %>
+      <%= f.select :satisfaction_vision, ["Very poor", "Poor", "Fair", "Good", "Very good"], label: "...vision in terms of ability to do work or hobbies?" %>
+      <%= f.select :satisfaction_overall_sense, ["Very poor", "Poor", "Fair", "Good", "Very good"], label: "...overall sense of well-being?" %>
+      <%= f.select :satisfaction_medication, ["Very poor", "Poor", "Fair", "Good", "Very good"], label: "...medication? (If not taking any, leave this blank)" %>
+      <%= f.select :satisfaction_overall_life, ["Very poor", "Poor", "Fair", "Good", "Very good"], label: "...overall life satisfaction and contentment?" %>
 
-        <%= f.check_box :edu_sup_check, label: "Education Support", inline: true %>
-
-        <%= f.check_box :act_team_check, label: "ACT Team", inline: true %>
-      <% end %>
-
-      <%= f.text_field :other_sup_text, label: "Other" %>
+      <p>Please answer in the context of thinking about drug use, include illegal drug use and the use of prescription drug use other than prescribed.</p>
+      <br>
+      <%= render partial: "cage_aid", locals: {f: f} %>
     </div>
   </div>
 
@@ -722,8 +735,12 @@
       <%= f.text_field :member_signature, label: ("Please sign your name to" +
         " this application by typing it in below (Member)"), required: true %>
 
+      <%= f.text_field :member_signature_date, label: "Date", readonly: true %>
+
       <%= f.text_field :referral_signature, label: ("Please sign your name to" +
         " this application by typing it in below (Referral)"), required: true %>
+
+      <%= f.text_field :referral_signature_date, label: "Date", readonly: true %>
     </div>
   </div>
 
