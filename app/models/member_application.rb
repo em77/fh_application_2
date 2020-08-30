@@ -51,6 +51,7 @@ class MemberApplication < ApplicationRecord
       member_signature_date: today,
       application_expiration_date: today + 60.days
     )
+    ApplicationLog.create
   end
 
   def update_expiration!
