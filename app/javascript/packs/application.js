@@ -127,6 +127,26 @@ document.addEventListener("turbolinks:load", () => {
 
     $("form")[0].submit();
   });
+
+  // If there's no navbar (submitted application on show view)
+  if ($(".navbar").length === 0) {
+    // Reduce body padding since there's no navbar
+    $("body").css("padding-top", "5px");
+
+    // Remove attachment file fields
+    $("#psych_eval_field").remove();
+    $("#psych_social_field").remove();
+    $("#insurance_card_field").remove();
+
+    // Disable all fields
+    function makeDisabled(element) {
+      $(element).attr("disabled", "disabled");
+    }
+
+    for (const element of $("form")[0].elements) {
+      makeDisabled(element);
+    }
+  }
 })
 
 // Uncomment to copy all static images under ../images to the output folder and reference

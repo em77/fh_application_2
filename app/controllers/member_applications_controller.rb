@@ -39,7 +39,8 @@ class MemberApplicationsController < ApplicationController
       flash[:success] = "Your application was submitted successfully"
       redirect_to member_application_path(member_application)
     elsif member_application.update(member_application_params)
-      flash[:notice] = "Application updated successfully.<br />To return to this form in the future and continue filling it out, bookmark the current page or copy this URL:<br />#{view_context.link_to("#{edit_member_application_url(member_application)}", edit_member_application_url(member_application))}"
+      member_application.update_expiration!
+      flash[:notice] = "Application updated successfully.<br />You can return to this form until #{member_application.application_expiration_date.strftime("%b %d, %Y")} and continue filling it out by bookmarking the current page or copying this URL:<br />#{view_context.link_to("#{edit_member_application_url(member_application)}", edit_member_application_url(member_application))}"
       render :edit, locals: { member_application: member_application }
     else
       flash[:error] = "Application update failed"

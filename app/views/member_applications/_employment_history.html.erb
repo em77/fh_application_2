@@ -1,10 +1,10 @@
 <%= f.select :currently_employed, ["No", "Yes"],
-  label: "Are you currently employed?" %>
+  { label: "Are you currently employed?", include_blank: true }, { required: true } %>
 
 <%= f.select :ever_worked, ["No", "Yes"],
-  label: "Have you ever worked for pay?" %>
+  { label: "Have you ever worked for pay?", include_blank: true }, { required: true } %>
 
 <%= f.select :worked_last_12_months, ["No", "Yes"],
-  label: "Have you worked in the last 12 months?" %>
+  { label: "Have you worked in the last 12 months?", include_blank: true }, { required: true } %>
 
-<%= f.text_field :num_years_of_work, label: "How many years have you had paid work?" %>
+<%= f.text_field :num_years_of_work, label: "How many years have you had paid work?", required: true %>

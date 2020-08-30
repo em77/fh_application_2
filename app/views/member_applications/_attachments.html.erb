@@ -4,17 +4,50 @@
   </div>
 
   <div class="panel-content">
-    <h4 class="required-fields-warning">Required</h4>
+    <% unless controller.action_name == "show" %>
+      <h4 class="required-fields-warning">Required</h4>
+    <% end %>
 
-    <%= f.file_field :psych_eval, label: sanitize("Please attach a current" +
-      " psychiatric evaluation using the DSM V (#{link_to 'template', 'https://fountainhouse-bucket.s3.amazonaws.com/Psychiatric+Evaluation+Template.docx', target: '_blank'})"), required: true %>
+    <% if member_application.psych_eval.present? %>
+      <div id="psych_eval_field">
+        <%= f.file_field :psych_eval, label: sanitize("Please attach a current" +
+          " psychiatric evaluation using the DSM V (#{link_to 'template', 'https://fountainhouse-bucket.s3.amazonaws.com/Psychiatric+Evaluation+Template.docx', target: '_blank'})") %>
+      </div>
+      <p>
+        A file has been uploaded a file for Psychiatric Evaluation: <%= link_to "Download", url_for(member_application.psych_eval), target: "_blank" %>
+      </p>
+    <% else %>
+      <%= f.file_field :psych_eval, label: sanitize("Please attach a current" +
+        " psychiatric evaluation using the DSM V (#{link_to 'template', 'https://fountainhouse-bucket.s3.amazonaws.com/Psychiatric+Evaluation+Template.docx', target: '_blank'})"), required: true %>
+    <% end %>
 
-    <%= f.file_field :psych_social, label: sanitize("Please attach a current" +
+    <% if member_application.psych_social.present? %>
+      <div id="psych_social_field">
+        <%= f.file_field :psych_social, label: sanitize("Please attach a current" +
+          " and detailed psychosocial history (#{link_to 'template', 'https://fountainhouse-bucket.s3.amazonaws.com/Psychosocial+Template.pdf', target: '_blank'})") %>
+      </div>
+      <p>
+        A file has been uploaded a file for Psychosocial History: <%= link_to "Download", url_for(member_application.psych_social), target: "_blank" %>
+      </p>
+    <% else %>
+      <%= f.file_field :psych_social, label: sanitize("Please attach a current" +
       " and detailed psychosocial history (#{link_to 'template', 'https://fountainhouse-bucket.s3.amazonaws.com/Psychosocial+Template.pdf', target: '_blank'})"), required: true %>
+    <% end %>
 
-    <%= f.file_field :insurance_card,
-      label: "Please attach a current insurance card", required: true %>
+    <% if member_application.insurance_card.present? %>
+      <div id="insurance_card_field">
+        <%= f.file_field :insurance_card, label: "Please attach a current insurance card" %>
+      </div>
+      <p>
+        A file has been uploaded a file for Insurance Card: <%= link_to "Download", url_for(member_application.insurance_card), target: "_blank" %>
+      </p>
+    <% else %>
+      <%= f.file_field :insurance_card, label: sanitize("Please attach a current" +
+        " psychiatric evaluation using the DSM V (#{link_to 'template', 'https://fountainhouse-bucket.s3.amazonaws.com/Psychiatric+Evaluation+Template.docx', target: '_blank'})"), required: true %>
+    <% end %>
 
-    <p><em>Accepted file types: .pdf, .doc, .docx, .jpg</em></p>
+    <% unless controller.action_name == "show" %>
+      <p><em>Accepted file types: .pdf, .doc, .docx, .jpg</em></p>
+    <% end %>
   </div>
 </div>

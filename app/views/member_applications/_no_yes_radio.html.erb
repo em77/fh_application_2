@@ -2,8 +2,8 @@
   <%= f.label element, label_text, class: "position-left" %>
   <%= f.form_group element do %>
     <div class="position-right">
-      <%= f.radio_button element, "No", label: "No", inline: true %>
-      <%= f.radio_button element, "Yes", label: "Yes", inline: true %>
+      <%= f.radio_button element, "No", label: "No", inline: true, required: true %>
+      <%= f.radio_button element, "Yes", label: "Yes", inline: true, required: true %>
     </div>
   <% end %>
 </div>

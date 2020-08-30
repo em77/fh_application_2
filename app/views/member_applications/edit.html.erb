@@ -1,7 +1,12 @@
 <% provide(:title, "Edit Membership Application Form") %>
 
-<nav class="navbar fixed-top navbar-light bg-light" id="save-draft-button_edit-view">
-  <button type="button" class="btn btn-success">Save Draft</button>
+<nav class="navbar fixed-top navbar-light bg-light">
+  <div id="save-draft-container">
+    <button type="button" class="btn btn-success" id="save-draft-button_edit-view">Save Draft</button>
+    <em>
+      Save your progress and continue later
+    </em>
+  </div>
 </nav>
 
 <%= render partial: 'header' %>
