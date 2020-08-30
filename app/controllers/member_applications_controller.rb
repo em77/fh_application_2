@@ -32,6 +32,10 @@ class MemberApplicationsController < ApplicationController
   end
 
   def update
+    if member_application.submitted?
+      flash[:error] = "You cannot update an application once it's submitted"
+      redirect_to member_application_path(member_application)
+    end
     member_application.attributes = member_application_params
     if member_application.valid? && params[:commit] == "Submit Application"
       member_application.update(member_application_params)
