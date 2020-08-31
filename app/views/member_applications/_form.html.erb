@@ -1,12 +1,12 @@
 <%= bootstrap_form_for(member_application, label_col: "col-lg-1 col-xs-1",
   id:"application-form", multipart: true) do |f| %>
 
-  <div class="panel panel-info">
-    <div class="panel-heading panel-heading-custom">
-      <h4 class="panel-title">Eligibility</h4>
+  <div class="card">
+    <div class="card-header bg-info text-white">
+      <h4 class="card-title">Eligibility</h4>
     </div>
 
-    <div class="panel-content">
+    <div class="card-body">
       To be eligible for membership an applicant must:
       <br>
       <ol>
@@ -34,12 +34,12 @@
 
   <%= render partial: "attachments", locals: { f: f, member_application: member_application } %>
 
-  <div class="panel panel-info">
-    <div class="panel-heading panel-heading-custom">
-      <h4 class="panel-title">Prospective Member</h4>
+  <div class="card">
+    <div class="card-header bg-info text-white">
+      <h4 class="card-title">Prospective Member</h4>
     </div>
 
-    <div class="panel-content">
+    <div class="card-body">
 
       <%= f.text_field :first_name, label: "First Name", required: true %>
 
@@ -63,12 +63,12 @@
     </div>
   </div>
 
-  <div class="panel panel-info">
-    <div class="panel-heading panel-heading-custom">
-      <h4 class="panel-title">Address</h4>
+  <div class="card">
+    <div class="card-header bg-info text-white">
+      <h4 class="card-title">Address</h4>
     </div>
 
-    <div class="panel-content">
+    <div class="card-body">
 
       <%= f.text_field :street_address, label: "Street address", required: true %>
 
@@ -96,12 +96,12 @@
     </div>
   </div>
 
-  <div class="panel panel-info">
-    <div class="panel-heading panel-heading-custom">
-      <h4 class="panel-title">Who is recommending you?</h4>
+  <div class="card">
+    <div class="card-header bg-info text-white">
+      <h4 class="card-title">Who is recommending you?</h4>
     </div>
 
-    <div class="panel-content">
+    <div class="card-body">
       <%= f.text_field :recommend_name, label: "Name", required: true %>
 
       <%= f.text_field :recommend_agency, label: "Agency Name", required: true %>
@@ -118,12 +118,12 @@
     </div>
   </div>
 
-  <div class="panel panel-info">
-    <div class="panel-heading panel-heading-custom">
-      <h4 class="panel-title">Fountain House Tour</h4>
+  <div class="card">
+    <div class="card-header bg-info text-white">
+      <h4 class="card-title">Fountain House Tour</h4>
     </div>
 
-    <div class="panel-content">
+    <div class="card-body">
       <div class="left-right-container">
         <%= f.label :tour_fh, ("Have you had a" +
           " tour of Fountain House?"), class: "position-left" %>
@@ -141,12 +141,12 @@
     </div>
   </div>
 
-  <div class="panel panel-info">
-    <div class="panel-heading panel-heading-custom">
-      <h4 class="panel-title">Main Goals</h4>
+  <div class="card">
+    <div class="card-header bg-info text-white">
+      <h4 class="card-title">Main Goals</h4>
     </div>
 
-    <div class="panel-content">
+    <div class="card-body">
       <%= f.select :main_goal, [
           "Community",
           "Socialize/Friends",
@@ -166,12 +166,12 @@
     </div>
   </div>
 
-  <div class="panel panel-info">
-    <div class="panel-heading panel-heading-custom">
-      <h4 class="panel-title">Housing</h4>
+  <div class="card">
+    <div class="card-header bg-info text-white">
+      <h4 class="card-title">Housing</h4>
     </div>
 
-    <div class="panel-content">
+    <div class="card-body">
       <%= f.select :current_housing_type, [
           "Own Home/Apartment (Non-subsidized)",
           "Home of Family Member",
@@ -205,15 +205,15 @@
     </div>
   </div>
 
-  <div class="panel panel-info">
-    <div class="panel-heading panel-heading-custom">
-      <h4 class="panel-title">Income</h4>
-      <h5 class="panel-subtext">
+  <div class="card">
+    <div class="card-header bg-info text-white">
+      <h4 class="card-title">Income</h4>
+      <h5 class="card-text">
         Enter monthly amounts in any categories that apply
       </h5>
     </div>
 
-    <div class="panel-content">
+    <div class="card-body">
 
       <%= f.number_field :ssi, label: "SSI", value: (params.dig(:member_application, :ssi) || member_application.ssi || 0),
         class: "income-field" %>
@@ -248,14 +248,14 @@
     </div>
   </div>
 
-  <div class="panel panel-info">
-    <div class="panel-heading panel-heading-custom">
-      <h4 class="panel-title">Ethnicity (check all that apply)</h4>
+  <div class="card">
+    <div class="card-header bg-info text-white">
+      <h4 class="card-title">Ethnicity (check all that apply)</h4>
     </div>
 
-    <div class="panel-content">
-      <div class="panel panel-default">
-        <div class="panel-body">
+    <div class="card-body">
+      <div class="card">
+        <div class="card-body">
           <%= f.form_group do %>
             <%= f.check_box :eth_aa, label: "Black (African-American)", inline: true %>
 
@@ -302,12 +302,12 @@
     </div>
   </div>
 
-  <div class="panel panel-info">
-    <div class="panel-heading panel-heading-custom">
-      <h4 class="panel-title">Demographic Info</h4>
+  <div class="card">
+    <div class="card-header bg-info text-white">
+      <h4 class="card-title">Demographic Info</h4>
     </div>
 
-    <div class="panel-content">
+    <div class="card-body">
       <%= f.text_field :other_language,
         label: "Primary language (if other than English)" %>
 
@@ -331,47 +331,47 @@
     </div>
   </div>
 
-  <div class="panel panel-info">
-    <div class="panel-heading panel-heading-custom">
-      <h4 class="panel-title">Education Level</h4>
-      <h5 class="panel-subtext">(check all that apply)</h5>
+  <div class="card">
+    <div class="card-header bg-info text-white">
+      <h4 class="card-title">Education Level</h4>
+      <h5 class="card-text">(check all that apply)</h5>
     </div>
 
-    <div class="panel-content">
+    <div class="card-body">
       <%= render partial: "education_level", locals: {f: f} %>
     </div>
   </div>
 
-  <div class="panel panel-info">
-    <div class="panel-heading panel-heading-custom">
-      <h4 class="panel-title">Current Community</h4>
-      <h5 class="panel-subtext">How well do each of the following statements represent how you <i>feel</i> about your current community?</h5>
+  <div class="card">
+    <div class="card-header bg-info text-white">
+      <h4 class="card-title">Current Community</h4>
+      <h5 class="card-text">How well do each of the following statements represent how you <i>feel</i> about your current community?</h5>
     </div>
 
-    <div class="panel-content">
+    <div class="card-body">
       <%= f.select :get_needs_met, ["Not at all", "Somewhat", "Mostly", "Completely"], { label: "I get important needs of mine met by my current community", include_blank: true }, { required: true } %>
 
       <%= f.select :feel_part, ["Not at all", "Somewhat", "Mostly", "Completely"], { label: "It is important for me to feel a part of a community", include_blank: true }, { required: true } %>
     </div>
   </div>
 
-  <div class="panel panel-info">
-    <div class="panel-heading panel-heading-custom">
-      <h4 class="panel-title">Employment History</h4>
+  <div class="card">
+    <div class="card-header bg-info text-white">
+      <h4 class="card-title">Employment History</h4>
     </div>
 
-    <div class="panel-content">
+    <div class="card-body">
       <%= render partial: "employment_history", locals: {f: f} %>
     </div>
   </div>
 
-  <div class="panel panel-info">
-    <div class="panel-heading panel-heading-custom">
-      <h4 class="panel-title">Medical Alerts</h4>
-      <h5 class="panel-subtext">(check all that apply)</h5>
+  <div class="card">
+    <div class="card-header bg-info text-white">
+      <h4 class="card-title">Medical Alerts</h4>
+      <h5 class="card-text">(check all that apply)</h5>
     </div>
 
-    <div class="panel-content">
+    <div class="card-body">
 
       <%= f.form_group do %>
         <%= f.check_box :med_alert_deaf, label: "Deaf/Hearing Impairment", inline: true %>
@@ -401,12 +401,12 @@
     </div>
   </div>
 
-  <div class="panel panel-info">
-    <div class="panel-heading panel-heading-custom">
-      <h4 class="panel-title">Psychiatric/NP Contact</h4>
+  <div class="card">
+    <div class="card-header bg-info text-white">
+      <h4 class="card-title">Psychiatric/NP Contact</h4>
     </div>
 
-    <div class="panel-content">
+    <div class="card-body">
 
       <%= f.text_field :psych_name, label: "Psychiatrist/NP" %>
 
@@ -423,12 +423,12 @@
     </div>
   </div>
 
-  <div class="panel panel-info">
-    <div class="panel-heading panel-heading-custom">
-      <h4 class="panel-title">Therapist Contact</h4>
+  <div class="card">
+    <div class="card-header bg-info text-white">
+      <h4 class="card-title">Therapist Contact</h4>
     </div>
 
-    <div class="panel-content">
+    <div class="card-body">
       <%= f.text_field :therapist_name, label: "Therapist" %>
 
       <%= f.text_field :therapist_agency, label: "Agency" %>
@@ -444,12 +444,12 @@
     </div>
   </div>
 
-  <div class="panel panel-info">
-    <div class="panel-heading panel-heading-custom">
-      <h4 class="panel-title">Medical Contact</h4>
+  <div class="card">
+    <div class="card-header bg-info text-white">
+      <h4 class="card-title">Medical Contact</h4>
     </div>
 
-    <div class="panel-content">
+    <div class="card-body">
       <%= f.text_field :primary_care_name, label: "Primary Care MD" %>
 
       <%= f.text_field :primary_care_agency, label: "Agency" %>
@@ -462,12 +462,12 @@
     </div>
   </div>
 
-  <div class="panel panel-info">
-    <div class="panel-heading panel-heading-custom">
-      <h4 class="panel-title">Emergency Contacts</h4>
+  <div class="card">
+    <div class="card-header bg-info text-white">
+      <h4 class="card-title">Emergency Contacts</h4>
     </div>
 
-    <div class="panel-content">
+    <div class="card-body">
 
       <%= f.text_field :emerg_primary_name, label: "Name (Primary)" %>
 
@@ -483,12 +483,12 @@
     </div>
   </div>
 
-  <div class="panel panel-info">
-    <div class="panel-heading panel-heading-custom">
-      <h4 class="panel-title">Medical Insurance</h4>
+  <div class="card">
+    <div class="card-header bg-info text-white">
+      <h4 class="card-title">Medical Insurance</h4>
     </div>
 
-    <div class="panel-content">
+    <div class="card-body">
 
       <%= f.select :insurance_name, [
           "None",
@@ -533,32 +533,32 @@
     </div>
   </div>
 
-  <div class="panel panel-info">
-    <div class="panel-heading panel-heading-custom">
-      <h4 class="panel-title">Diagnosis</h4>
+  <div class="card">
+    <div class="card-header bg-info text-white">
+      <h4 class="card-title">Diagnosis</h4>
     </div>
-    <div class="panel-content">
+    <div class="card-body">
       <%= f.text_area :dsm_v, label: "Psychiatric Diagnosis (DSM V)", required: true %>
     </div>
   </div>  
 
-  <div class="panel panel-info">
-    <div class="panel-heading panel-heading-custom">
-      <h4 class="panel-title">Medication Information</h4>
-      <h5 class="panel-subtext">Please list all medications you are currently
+  <div class="card">
+    <div class="card-header bg-info text-white">
+      <h4 class="card-title">Medication Information</h4>
+      <h5 class="card-text">Please list all medications you are currently
         taking with respective names, dosage, and frequency.</h5>
     </div>
-    <div class="panel-content">
+    <div class="card-body">
       <%= render partial: "medication_info", locals: {f: f} %>
     </div>
   </div>  
 
-  <div class="panel panel-info">
-    <div class="panel-heading panel-heading-custom">
-      <h4 class="panel-title">Psychiatric Hospitalizations</h4>
-      <h5 class="panel-subtext">Please list your first and most recent hospitalization, indicating the name of hospital and <em>approximate</em> dates.</h5>
+  <div class="card">
+    <div class="card-header bg-info text-white">
+      <h4 class="card-title">Psychiatric Hospitalizations</h4>
+      <h5 class="card-text">Please list your first and most recent hospitalization, indicating the name of hospital and <em>approximate</em> dates.</h5>
     </div>
-    <div class="panel-content">
+    <div class="card-body">
       <%= f.number_field :hospitalization_count,
         label: "Total Number of Psychiatric Inpatient Hospitalizations", id: "hosp-count",
         required: true %>
@@ -616,12 +616,12 @@
     </div>
   </div>
 
-  <div class="panel panel-info">
-    <div class="panel-heading panel-heading-custom">
-      <h4 class="panel-title">Substance Abuse History</h4>
+  <div class="card">
+    <div class="card-header bg-info text-white">
+      <h4 class="card-title">Substance Abuse History</h4>
     </div>
 
-    <div class="panel-content">
+    <div class="card-body">
       <%= f.select :currently_tobacco, ["No", "Yes"],
         { label: "Do you currently smoke tobacco or use tobacco products?", include_blank: true }, { required: true } %>
 
@@ -651,23 +651,23 @@
     </div>
   </div>
 
-  <div class="panel panel-info">
-    <div class="panel-heading panel-heading-custom">
-      <h4 class="panel-title">Legal History</h4>
+  <div class="card">
+    <div class="card-header bg-info text-white">
+      <h4 class="card-title">Legal History</h4>
     </div>
 
-    <div class="panel-content">
+    <div class="card-body">
       <%= render partial: "legal_history", locals: {f: f} %>
     </div>
   </div>
 
-  <div class="panel panel-info">
-    <div class="panel-heading panel-heading-custom">
-      <h4 class="panel-title">Questionnaires</h4>
-      <h5 class="panel-subtext">The following are two surveys and a questionnaire. They are required by one of our funding sources. Please note that your answers to these questions do not affect your acceptance to Fountain House.</h5>
+  <div class="card">
+    <div class="card-header bg-info text-white">
+      <h4 class="card-title">Questionnaires</h4>
+      <h5 class="card-text">The following are two surveys and a questionnaire. They are required by one of our funding sources. Please note that your answers to these questions do not affect your acceptance to Fountain House.</h5>
     </div>
 
-    <div class="panel-content">
+    <div class="card-body">
       <p>Please answer the following questions:</p>
       <br>
       <%= f.select :get_needs_met, ["Not at all", "Somewhat", "Mostly", "Completely"], { label: "I get important needs of mine met by my current community", include_blank: true }, { required: true } %>
@@ -698,18 +698,22 @@
       <%= f.select :satisfaction_medication, ["Very poor", "Poor", "Fair", "Good", "Very good"], { label: "...medication? (If not taking any, leave this blank)", include_blank: true }, { required: true } %>
       <%= f.select :satisfaction_overall_life, ["Very poor", "Poor", "Fair", "Good", "Very good"], { label: "...overall life satisfaction and contentment?", include_blank: true }, { required: true } %>
 
-      <p>Please answer in the context of thinking about drug use, include illegal drug use and the use of prescription drug use other than prescribed.</p>
-      <br>
-      <%= render partial: "cage_aid", locals: {f: f} %>
+      <div class="card">
+        <div class="card-body">
+          <p>Please answer in the context of thinking about drug use, include illegal drug use and the use of prescription drug use other than prescribed.</p>
+
+          <%= render partial: "cage_aid", locals: {f: f} %>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="panel panel-info">
-    <div class="panel-heading panel-heading-custom">
-      <h4 class="panel-title">Signature</h4>
+  <div class="card">
+    <div class="card-header bg-info text-white">
+      <h4 class="card-title">Signature</h4>
     </div>
 
-    <div class="panel-content">
+    <div class="card-body">
       <div class="left-right-container">
         <%= f.label :bronx_or_manhattan, ("Are you applying" +
           " to Fountain House Manhattan or Fountain House Bronx?"),
@@ -743,12 +747,12 @@
   </div>
 
   <% unless controller.action_name == "show" %>
-    <div class="panel panel-info">
-      <div class="panel-heading panel-heading-custom">
-        <h4 class="panel-title">Application Submission</h4>
+    <div class="card">
+      <div class="card-header bg-info text-white">
+        <h4 class="card-title">Application Submission</h4>
       </div>
 
-      <div class="panel-content">
+      <div class="card-body">
         <h4>
           It is very important that all components of this application are
           absolutely complete. Any missing or incomplete components will,

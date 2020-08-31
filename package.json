@@ -11,7 +11,6 @@
     "coffeescript": "1.12.7",
     "flatpickr": "^4.6.3",
     "jquery": "^3.5.1",
-    "jquery-ui": "^1.12.1",
     "moment": "^2.26.0",
     "popper.js": "^1.16.1",
     "turbolinks": "^5.2.0"

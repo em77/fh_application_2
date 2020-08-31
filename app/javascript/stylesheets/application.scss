@@ -19,8 +19,40 @@
 
 body {
   padding-top: 75px;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
   padding-bottom: 20px;
   overflow: scroll;
+}
+
+#logo-title-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.25%;
+  margin-bottom: 1%;
+}
+
+#fh-logo-app {
+  margin-left: 2%;
+}
+
+#app-title {
+  margin-right: 2.5%;
+  margin-top: 2%;
+}
+
+.card {
+  width: 95%;
+  margin: 0 auto;
+  overflow: hidden;
+  margin-bottom: 1.5%;
+}
+
+.required-fields-warning {
+  color: #E30000;
+  font-weight: bold;
+}
+
+#hosp-count {
+  width: 10%;
 }
