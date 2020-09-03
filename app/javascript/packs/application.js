@@ -25,23 +25,34 @@ import 'flatpickr/dist/plugins/monthSelect/style.css';
 import bsCustomFileInput from 'bs-custom-file-input';
 
 document.addEventListener("turbolinks:load", () => {
-  // $('[data-toggle="tooltip"]').tooltip()
   flatpickr("[data-behavior='flatpickr']", {
+    allowInput: true, // Compensation for HTML validation otherwise not working
     altInput: true,
     altFormat: "F j, Y",
     dateFormat: "Y-m-d"
   });
 
+  // Select all on focus of flatpickr field
+  $("[data-behavior='flatpickr']").next().focus(function() {
+    $(this).on("click.a keyup.a", function(e){      
+      $(this).off("click.a keyup.a").select();
+    });
+  });
+
   bsCustomFileInput.init();
 
   // Auto-fill age field from DOB
-  $('#dob-field').change(function() {
-    var dob, duration, now, years;
-    now = moment();
-    dob = moment($('#dob-field').val());
-    duration = moment.duration(now.diff(dob));
-    years = duration.asYears();
-    $('#age-field').val(Math.round(years));
+  $("#dob-field").change(function() {
+    if ($("#dob-field").val() === "") {
+      $('#age-field').val("");
+    } else {
+      var dob, duration, now, years;
+      now = moment();
+      dob = moment($('#dob-field').val());
+      duration = moment.duration(now.diff(dob));
+      years = duration.asYears();
+      $('#age-field').val(Math.round(years));
+    }
   });
 
   // Total income field auto-filler
@@ -114,7 +125,7 @@ document.addEventListener("turbolinks:load", () => {
 
   // Remove all "required" attributes on fields, remove entire attachments section
   // and submit form on "Save Draft" button click
-  $("#save-draft-button_edit-view").on("click", function() {
+  $("#save-draft-button").on("click", function() {
     $("#attachments-section").remove();
 
     function removeRequired(element) {

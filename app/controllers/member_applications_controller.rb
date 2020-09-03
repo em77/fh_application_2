@@ -36,12 +36,15 @@ class MemberApplicationsController < ApplicationController
       flash[:error] = "You cannot update an application once it's submitted"
       redirect_to member_application_path(member_application) and return
     end
-    member_application.attributes = member_application_params
-    if member_application.valid? && params[:commit] == "Submit Application"
-      member_application.update(member_application_params)
-      member_application.finalize!
-      flash[:success] = "Your application was submitted successfully"
-      redirect_to member_application_path(member_application)
+    if params[:commit] == "Submit Application"
+      if member_application.update(member_application_params.merge(application_status: "submitted"))
+        member_application.finalize!
+        flash[:success] = "Your application was submitted successfully"
+        redirect_to member_application_path(member_application)
+      else
+        flash[:error] = member_application.errors.full_messages.to_sentence
+        render :edit, locals: { member_application: member_application }
+      end
     elsif member_application.update(member_application_params)
       member_application.update_expiration!
       flash[:notice] = "Application updated successfully.<br />You can return to this form until #{member_application.application_expiration_date.strftime("%b %d, %Y")} and continue filling it out by bookmarking the current page or copying this URL:<br />#{view_context.link_to("#{edit_member_application_url(member_application)}", edit_member_application_url(member_application))}"

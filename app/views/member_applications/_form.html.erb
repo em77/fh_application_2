@@ -47,12 +47,11 @@
 
       <%= f.text_field :last_name, label: "Last Name", required: true %>
 
-      <%= f.text_field :dob, label: "Date of Birth",
-        required: true, id: "dob-field",
-        data: { behavior: "flatpickr" } %>
+      <%= f.text_field :dob,
+        { label: "Date of Birth", required: true, id: "dob-field", data: { behavior: "flatpickr" } } %>
 
       <%= f.text_field :age, label: "Age", required: true, id: "age-field",
-        readonly: true %>
+        readonly: true, value: "" %>
 
       <%= f.text_field :ssn, {label: "SSN",
         required: true, id: "ssn-field", pattern: "^[0-9]{9}$",
@@ -108,7 +107,7 @@
 
       <%= f.phone_field :recommend_phone_number, label: "Phone number", required: true %>
 
-      <%= f.text_field :recommend_agency_type, label: "Type of agency", require: true %>
+      <%= f.text_field :recommend_agency_type, label: "Type of agency", required: true %>
 
       <%= f.text_field :recommend_known_length,
         label: "How long have you known this person?",
@@ -526,7 +525,7 @@
       <%= f.select :hcbs, ["No", "Yes", "Unknown"], { label: "Home and Community Based Services (HCBS)", include_blank: true }, { required: true } %>
 
       <%= f.text_field :last_physical_exam_date,
-        label: "Date of last physical exam", required: true, data: { behavior: "flatpickr" } %>
+        { label: "Date of last physical exam", required: true, data: { behavior: "flatpickr" } } %>
 
       <%= f.text_field :last_dental_exam_date,
         label: "Date of last dental exam", data: { behavior: "flatpickr" } %>

@@ -45,7 +45,6 @@ class MemberApplication < ApplicationRecord
   end
 
   def finalize!
-    submitted!
     self.update(
       referral_signature_date: today,
       member_signature_date: today,
