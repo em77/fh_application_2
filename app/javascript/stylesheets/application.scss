@@ -1,5 +1,6 @@
 // Begin bootstrap_form styles
 @import "~bootstrap/scss/bootstrap";
+@import '@fortawesome/fontawesome-free';
 
 .rails-bootstrap-forms-date-select select,
 .rails-bootstrap-forms-time-select select,
@@ -55,4 +56,20 @@ body {
 
 #hosp-count {
   width: 10%;
+}
+
+.file-upload-field {
+  width: 70%;
+}
+
+#psych_eval_field {
+  display: none;
+}
+
+#psych_social_field {
+  display: none;
+}
+
+#insurance_card_field {
+  display: none;
 }

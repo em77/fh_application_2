@@ -10,6 +10,7 @@ require("@rails/activestorage").start()
 require("jquery");
 
 import 'bootstrap';
+import "@fortawesome/fontawesome-free/js/all";
 import '../stylesheets/application';
 
 import moment from 'moment';
@@ -157,6 +158,31 @@ document.addEventListener("turbolinks:load", () => {
     for (const element of $("form")[0].elements) {
       makeDisabled(element);
     }
+  }
+
+  // Attachment openers
+  if ($("#psych_eval_header").length > 0) {
+    $("#psych_eval_field_opener").on("click", function() {
+      $("#psych_eval_field").show();
+    });
+  } else {
+    $("#psych_eval_field").show();
+  }
+
+  if ($("#psych_social_header").length > 0) {
+    $("#psych_social_field_opener").on("click", function() {
+      $("#psych_social_field").show();
+    });
+  } else {
+    $("#psych_social_field").show();
+  }
+
+  if ($("#insurance_card_header").length > 0) {
+    $("#insurance_card_field_opener").on("click", function() {
+      $("#insurance_card_field").show();
+    });
+  } else {
+    $("#insurance_card_field").show();
   }
 })
 
