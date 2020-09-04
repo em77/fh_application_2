@@ -51,7 +51,7 @@
         { label: "Date of Birth", required: true, id: "dob-field", data: { behavior: "flatpickr" } } %>
 
       <%= f.text_field :age, label: "Age", required: true, id: "age-field",
-        readonly: true, value: "" %>
+        readonly: true, value: (member_application.age || "") %>
 
       <%= f.text_field :ssn, {label: "SSN",
         required: true, id: "ssn-field", pattern: "^[0-9]{9}$",

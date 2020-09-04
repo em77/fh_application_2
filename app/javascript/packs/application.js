@@ -43,16 +43,17 @@ document.addEventListener("turbolinks:load", () => {
   bsCustomFileInput.init();
 
   // Auto-fill age field from DOB
-  $("#dob-field").change(function() {
+  $("#dob-field").next().on("blur", function() {
     if ($("#dob-field").val() === "") {
-      $('#age-field').val("");
+      $("#age-field").val("");
     } else {
-      var dob, duration, now, years;
+      var dob, duration, now, years, age;
       now = moment();
-      dob = moment($('#dob-field').val());
+      dob = moment($("#dob-field").val());
       duration = moment.duration(now.diff(dob));
       years = duration.asYears();
-      $('#age-field').val(Math.round(years));
+      age = Math.round(years);
+      $("#age-field").val(age);
     }
   });
 

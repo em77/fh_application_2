@@ -15,6 +15,9 @@ class MemberApplication < ApplicationRecord
   validates :ssn, format: { with: /\A[0-9]{9}\z/,
     message: "must be a 9 digit number" }, unless: :is_draft?
 
+  validates :age, format: { with: /\A(1[89]|[2-9][0-9]|1[0-3][0-9]|140)\z/,
+    message: "must be 18 or older to apply (adjust Date of Birth to change)" }, unless: :is_draft?
+
   validates :first_name, :last_name, :dob, :age, :ssn, :gender,
     :street_address, :city, :state, :zip_code, :phone_number,
     :residence_time_length, :recommend_name, :recommend_agency,
