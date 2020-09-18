@@ -5,7 +5,7 @@
 
   <div class="card-body">
     <div class="card border-info">
-      <% if member_application.psych_eval.present? %>
+      <% if member_application.psych_eval.try(:persisted?) %>
         <div class="card-header" id="psych_eval_header">
           A file has been uploaded for Psychiatric Evaluation: <%= link_to "Download", url_for(member_application.psych_eval), target: "_blank" %>
         </div>
@@ -21,15 +21,17 @@
           </div>
         <% end %>
       <% else %>
-        <div id="psych_eval_field" class="file-upload-field">
-          <%= f.file_field :psych_eval, label: sanitize("Please attach a current" +
-            " psychiatric evaluation using the DSM V (#{link_to 'template', 'https://fountainhouse-bucket.s3.amazonaws.com/Psychiatric+Evaluation+Template.docx', target: '_blank'})"), required: true %>
+        <div class="card-body">
+          <div id="psych_eval_field" class="file-upload-field">
+            <%= f.file_field :psych_eval, label: sanitize("Please attach a current" +
+              " psychiatric evaluation using the DSM V (#{link_to 'template', 'https://fountainhouse-bucket.s3.amazonaws.com/Psychiatric+Evaluation+Template.docx', target: '_blank'})"), required: true %>
+          </div>
         </div>
       <% end %>
     </div>
 
     <div class="card border-info">
-      <% if member_application.psych_social.present? %>
+      <% if member_application.psych_social.try(:persisted?) %>
         <div class="card-header" id="psych_social_header">
           A file has been uploaded for Psychosocial History: <%= link_to "Download", url_for(member_application.psych_social), target: "_blank" %>
         </div>
@@ -45,15 +47,17 @@
           </div>
         <% end %>
       <% else %>
-        <div id="psych_social_field" class="file-upload-field">
-          <%= f.file_field :psych_social, label: sanitize("Please attach a current" +
-            " and detailed psychosocial history (#{link_to 'template', 'https://fountainhouse-bucket.s3.amazonaws.com/Psychosocial+Template.pdf', target: '_blank'})"), required: true %>
+        <div class="card-body">
+          <div id="psych_social_field" class="file-upload-field">
+            <%= f.file_field :psych_social, label: sanitize("Please attach a current" +
+              " and detailed psychosocial history (#{link_to 'template', 'https://fountainhouse-bucket.s3.amazonaws.com/Psychosocial+Template.pdf', target: '_blank'})"), required: true %>
+          </div>
         </div>
       <% end %>
     </div>
 
     <div class="card border-info">
-      <% if member_application.insurance_card.present? %>
+      <% if member_application.insurance_card.try(:persisted?) %>
         <div class="card-header" id="insurance_card_header">
           A file has been uploaded for Insurance Card: <%= link_to "Download", url_for(member_application.insurance_card), target: "_blank" %>
         </div>

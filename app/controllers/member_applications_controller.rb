@@ -1,4 +1,9 @@
 class MemberApplicationsController < ApplicationController
+  FILE_TYPE_WHITELIST = ["application/pdf",
+                         "application/msword",
+                         "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                         "image/jpeg"].freeze
+
   def new
     render :new, locals: { member_application: MemberApplication.new }
   end
@@ -6,11 +11,22 @@ class MemberApplicationsController < ApplicationController
   def create
     @member_application = MemberApplication.new(member_application_params)
 
-    if @member_application.save
-      redirect_to new_member_application_path, success: "Your application was submitted successfully"
+    if params[:commit] == "Submit Application"
+      if file_types_valid? && MemberApplication.create(member_application_params.merge(application_status: "submitted"))
+        member_application.finalize!
+        flash[:success] = "Your application was submitted successfully"
+        redirect_to member_application_path(member_application)
+      else
+        flash.now[:error] = member_application.errors.full_messages.to_sentence
+        render :new, locals: { member_application: member_application }
+      end
+    elsif file_types_valid? && MemberApplication.create(member_application_params)
+      member_application.update_expiration!
+      flash.now[:notice] = "Application created successfully.<br />You can return to this form until #{member_application.application_expiration_date.strftime("%b %d, %Y")} and continue filling it out by bookmarking the current page or copying this URL:<br />#{view_context.link_to("#{edit_member_application_url(member_application)}", edit_member_application_url(member_application))}"
+      render :edit, locals: { member_application: member_application }
     else
-      flash[:error] = @member_application.errors.full_messages.to_sentence
-      render :new, locals: { member_application: @member_application }
+      flash.now[:error] = member_application.errors.full_messages.to_sentence
+      render :new, locals: { member_application: member_application }
     end
   end
 
@@ -37,20 +53,20 @@ class MemberApplicationsController < ApplicationController
       redirect_to member_application_path(member_application) and return
     end
     if params[:commit] == "Submit Application"
-      if member_application.update(member_application_params.merge(application_status: "submitted"))
+      if file_types_valid? && member_application.update(member_application_params.merge(application_status: "submitted"))
         member_application.finalize!
         flash[:success] = "Your application was submitted successfully"
         redirect_to member_application_path(member_application)
       else
-        flash[:error] = member_application.errors.full_messages.to_sentence
+        flash.now[:error] = member_application.errors.full_messages.to_sentence
         render :edit, locals: { member_application: member_application }
       end
-    elsif member_application.update(member_application_params)
+    elsif file_types_valid? && member_application.update(member_application_params)
       member_application.update_expiration!
-      flash[:notice] = "Application updated successfully.<br />You can return to this form until #{member_application.application_expiration_date.strftime("%b %d, %Y")} and continue filling it out by bookmarking the current page or copying this URL:<br />#{view_context.link_to("#{edit_member_application_url(member_application)}", edit_member_application_url(member_application))}"
+      flash.now[:notice] = "Application updated successfully.<br />You can return to this form until #{member_application.application_expiration_date.strftime("%b %d, %Y")} and continue filling it out by bookmarking the current page or copying this URL:<br />#{view_context.link_to("#{edit_member_application_url(member_application)}", edit_member_application_url(member_application))}"
       render :edit, locals: { member_application: member_application }
     else
-      flash[:error] = "Application update failed"
+      flash.now[:error] = member_application.errors.full_messages.to_sentence
       render :edit, locals: { member_application: member_application }
     end
   end
@@ -59,6 +75,20 @@ class MemberApplicationsController < ApplicationController
 
   def member_application
     @member_application ||= MemberApplication.find(params.require(:id))
+  end
+
+  def attachment_file_type(attachment_name)
+    Terrapin::CommandLine.new("file", "-b --mime-type #{params["member_application"][attachment_name].tempfile.path}").run.chomp
+  end
+
+  def file_types_valid?
+    ["psych_eval", "psych_social", "insurance_card"].each do |attachment_name|
+      next if params["member_application"][attachment_name].blank?
+      unless FILE_TYPE_WHITELIST.include?(attachment_file_type(attachment_name))
+        member_application.errors.add(attachment_name, "must be an accepted file type (.pdf, .doc, .docx, .jpg)")
+      end
+    end
+    member_application.errors.none?
   end
 
   def member_application_params

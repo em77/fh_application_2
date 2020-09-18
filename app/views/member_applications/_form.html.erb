@@ -343,19 +343,6 @@
 
   <div class="card">
     <div class="card-header bg-info text-white">
-      <h4 class="card-title">Current Community</h4>
-      <h5 class="card-text">How well do each of the following statements represent how you <i>feel</i> about your current community?</h5>
-    </div>
-
-    <div class="card-body">
-      <%= f.select :get_needs_met, ["Not at all", "Somewhat", "Mostly", "Completely"], { label: "I get important needs of mine met by my current community", include_blank: true }, { required: true } %>
-
-      <%= f.select :feel_part, ["Not at all", "Somewhat", "Mostly", "Completely"], { label: "It is important for me to feel a part of a community", include_blank: true }, { required: true } %>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header bg-info text-white">
       <h4 class="card-title">Employment History</h4>
     </div>
 
@@ -575,7 +562,7 @@
             control_col: "col-lg-12",
             class: "row_field",
             data: { behavior: "flatpickr" },
-            placeholder: "Approx. Start Date" %>
+            placeholder: "Approx. Start Date (First)" %>
         </div>
 
         <div class="col-lg-4 col-xs-4 row_element">
@@ -583,7 +570,7 @@
             control_col: "col-lg-12",
             class: "row_field",
             data: { behavior: "flatpickr" },
-            placeholder: "Approx. End Date" %>
+            placeholder: "Approx. End Date (First)" %>
         </div>
       </div>
     </div>
@@ -601,7 +588,7 @@
             control_col: "col-lg-12",
             class: "row_field",
             data: { behavior: "flatpickr" },
-            placeholder: "Approx. Start Date" %>
+            placeholder: "Approx. Start Date (Recent)" %>
         </div>
 
         <div class="col-lg-4 col-xs-4 row_element">
@@ -609,7 +596,7 @@
             control_col: "col-lg-12",
             class: "row_field",
             data: { behavior: "flatpickr" },
-            placeholder: "Approx. End Date" %>
+            placeholder: "Approx. End Date (Recent)" %>
         </div>
       </div>
     </div>
@@ -733,14 +720,16 @@
         " this application by typing it in below (Member)"), required: true %>
 
       <% if controller.action_name == "show" %>
-        <%= f.text_field :member_signature_date, label: "Date", readonly: true %>
+        <%= f.text_field :member_signature_date,
+          { label: "Date (Member)", readonly: true, value: member_application.member_signature_date.strftime("%B %-d, %Y") } %>
       <% end %>
 
       <%= f.text_field :referral_signature, label: ("Please sign your name to" +
         " this application by typing it in below (Referral)"), required: true %>
 
       <% if controller.action_name == "show" %>
-        <%= f.text_field :referral_signature_date, label: "Date", readonly: true %>
+        <%= f.text_field :referral_signature_date,
+          { label: "Date (Referral)", readonly: true, value: member_application.referral_signature_date.strftime("%B %-d, %Y") } %>
       <% end %>
     </div>
   </div>

@@ -125,11 +125,8 @@ document.addEventListener("turbolinks:load", () => {
     }
   });
 
-  // Remove all "required" attributes on fields, remove entire attachments section
-  // and submit form on "Save Draft" button click
+  // Remove all "required" attributes on fields and submit form on "Save Draft" button click
   $("#save-draft-button").on("click", function() {
-    $("#attachments-section").remove();
-
     function removeRequired(element) {
       $(element).prop("required", false);
     }
@@ -162,29 +159,19 @@ document.addEventListener("turbolinks:load", () => {
   }
 
   // Attachment openers
-  if ($("#psych_eval_header").length > 0) {
-    $("#psych_eval_field_opener").on("click", function() {
-      $("#psych_eval_field").show();
-    });
-  } else {
-    $("#psych_eval_field").show();
+  function openAttachmentListener(attachment_name) {
+    if ($("#" + attachment_name + "_header").length > 0) {
+      $("#" + attachment_name + "_field_opener").on("click", function() {
+        $("#" + attachment_name + "_field").show();
+      });
+    } else {
+      $("#" + attachment_name + "_field").show();
+    }
   }
 
-  if ($("#psych_social_header").length > 0) {
-    $("#psych_social_field_opener").on("click", function() {
-      $("#psych_social_field").show();
-    });
-  } else {
-    $("#psych_social_field").show();
-  }
-
-  if ($("#insurance_card_header").length > 0) {
-    $("#insurance_card_field_opener").on("click", function() {
-      $("#insurance_card_field").show();
-    });
-  } else {
-    $("#insurance_card_field").show();
-  }
+  openAttachmentListener("psych_eval");
+  openAttachmentListener("psych_social");
+  openAttachmentListener("insurance_card");
 })
 
 // Uncomment to copy all static images under ../images to the output folder and reference

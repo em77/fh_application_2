@@ -6,11 +6,7 @@ class MemberApplication < ApplicationRecord
   enum application_status: [:draft, :submitted]
 
   validates :psych_eval, :psych_social, :insurance_card,
-    attached: true,
-    content_type: ["application/pdf",
-                   "application/msword",
-                   "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                   "image/jpeg"], unless: :is_draft?
+    attached: true, unless: :is_draft?
 
   validates :ssn, format: { with: /\A[0-9]{9}\z/,
     message: "must be a 9 digit number" }, unless: :is_draft?
@@ -54,6 +50,7 @@ class MemberApplication < ApplicationRecord
       application_expiration_date: today + 60.days
     )
     ApplicationLog.create
+    MemberApplicationMailer.new_member_application(self).deliver_later
   end
 
   def update_expiration!
