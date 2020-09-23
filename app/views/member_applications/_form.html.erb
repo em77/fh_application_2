@@ -1,3 +1,9 @@
+<div class="jumbotron" id="loading-overlay">
+  <h1 class="display-4">Processing...</h1>
+  <i class="fas fa-sync-alt fa-spin fa-7x"></i>
+  <p class="lead">Your application is being processed. Please do not close this page at this time.</p>
+</div>
+
 <%= bootstrap_form_for(member_application, label_col: "col-lg-1 col-xs-1",
   id:"application-form", multipart: true) do |f| %>
 

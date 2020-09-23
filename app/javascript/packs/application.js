@@ -33,6 +33,11 @@ document.addEventListener("turbolinks:load", () => {
     dateFormat: "Y-m-d"
   });
 
+  // Disable enter key except for textareas
+  $(document).on("keydown", ":input:not(textarea)", function(event) {
+    return event.key != "Enter";
+  });
+
   // Select all on focus of flatpickr field
   $("[data-behavior='flatpickr']").next().focus(function() {
     $(this).on("click.a keyup.a", function(e){      
@@ -108,8 +113,11 @@ document.addEventListener("turbolinks:load", () => {
     }
   });
 
-  // Required field checker for old Safari versions
   $("form").submit(function(e) {
+    // Progress overlay
+    $("#loading-overlay").show();
+
+    // Required field checker for old Safari versions
     var ref;
     if (!e.target.checkValidity()) {
       ref = $(this).find("[required]");
@@ -127,6 +135,9 @@ document.addEventListener("turbolinks:load", () => {
 
   // Remove all "required" attributes on fields and submit form on "Save Draft" button click
   $("#save-draft-button").on("click", function() {
+    // Progress overlay
+    $("#loading-overlay").show();
+
     function removeRequired(element) {
       $(element).prop("required", false);
     }
