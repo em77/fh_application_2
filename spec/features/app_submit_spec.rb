@@ -18,6 +18,9 @@ feature "app submit" do
     fill_out_app
     click_on "Submit Application"
     expect(page).to have_content "Your application was submitted successfully"
+    mail = ActionMailer::Base.deliveries.first
+    expect(mail).to_not be nil
+    expect(mail.body.raw_source).to include "https://www.fhapplication.org/member_applications/#{MemberApplication.last.id}"
   end
 
   scenario "user cannot submit an app with spoofed attachments" do
@@ -37,5 +40,6 @@ feature "app submit" do
     fill_out_app
     click_on "Submit Application"
     expect(page).to have_content ("Psychosocial History must be an accepted file type (.pdf, .doc, .docx, .jpg)")
+    expect(ActionMailer::Base.deliveries).to be_empty
   end
 end
