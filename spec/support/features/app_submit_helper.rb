@@ -1,13 +1,19 @@
 module Features
   module AppSubmitHelper
-    def fill_out_app
+    def fill_out_app(with_js = false)
       Faker::Config.locale = "en-US"
-      
+
       fill_in :member_application_first_name, with: Faker::Name.first_name
       fill_in :member_application_last_name, with: Faker::Name.last_name
       fill_in :member_application_mi, with: "A"
-      fill_in "Date of Birth", with: Faker::Date.between(from: 40.years.ago, to: 20.years.ago).strftime("%B %d, %Y")
-      fill_in "SSN", with: Faker::Number.number(9)
+
+      if with_js
+        find_field("dob-field", type: :hidden).sibling("input").set(Faker::Date.between(from: 40.years.ago, to: 20.years.ago).strftime("%B %d, %Y"))
+      else
+        fill_in "Date of Birth", with: Faker::Date.between(from: 40.years.ago, to: 20.years.ago).strftime("%B %d, %Y")
+      end
+
+      fill_in "SSN", with: Faker::Number.number(digits: 9)
       fill_in :member_application_gender, with: "Female"
       fill_in :member_application_apt, with: Faker::Address.secondary_address
       fill_in :member_application_city, with: Faker::Address.city
@@ -18,7 +24,11 @@ module Features
 
       fill_in :member_application_housing_agency_program_name, with: Faker::Company.buzzword
 
-      fill_in "Date of tour", with: Faker::Date.between(from: 1.years.ago, to: 10.days.ago).strftime("%B %d, %Y")
+      if with_js
+        find_field("member_application_tour_date", type: :hidden).sibling("input").set(Faker::Date.between(from: 1.years.ago, to: 10.days.ago).strftime("%B %d, %Y"))
+      else
+        fill_in "Date of tour", with: Faker::Date.between(from: 1.years.ago, to: 10.days.ago).strftime("%B %d, %Y")
+      end
 
       select("Education", from: (:member_application_main_goal).to_s)
 
@@ -42,11 +52,19 @@ module Features
         fill_in n, with: Faker::Lorem.word
       end
 
-      ["Date of last physical exam", "Date of last dental exam", "Approx. End Date (Recent)",
+      if with_js
+        ["member_application_last_physical_exam_date", "member_application_last_dental_exam_date", "member_application_hospital_first_start_date",
+          "member_application_hospital_first_end_date", "member_application_hospital_recent_start_date", "member_application_hospital_recent_end_date"]
+          .each do |id|
+            find_field(id, type: :hidden).sibling("input").set(Faker::Date.between(from: 15.years.ago, to: Date.today).strftime("%B %d, %Y"))
+          end
+      else
+        ["Date of last physical exam", "Date of last dental exam", "Approx. End Date (Recent)",
         "Approx. Start Date (Recent)", "Approx. Start Date (First)", "Approx. End Date (First)"]
         .each do |name|
           fill_in name, with: Faker::Date.between(from: 15.years.ago, to: Date.today).strftime("%B %d, %Y")
         end
+      end
 
       fill_in "Total Number of Psychiatric Inpatient Hospitalizations", with: rand(40)
 
@@ -56,7 +74,7 @@ module Features
           fill_in n, with: Faker::Name.name
         end
       [:member_application_recommend_agency, :member_application_psych_agency, :member_application_therapist_agency,
-        :member_application_primary_care_agency, :member_application_insurance_other, :member_application_medicaid_comp,
+        :member_application_primary_care_agency, :member_application_recommend_agency_type,
         :member_application_hospital_first_name, :member_application_hospital_recent_name]
         .each do |n|
           fill_in n, with: Faker::Company.name
@@ -117,7 +135,7 @@ module Features
           fill_in n, with: Faker::Lorem.paragraphs(1).join
         end
 
-      [:member_application_have_homeless_history, :member_application_reside_with_minors, :member_application_acs_involvement,
+      [:member_application_have_homeless_history,
         :member_application_are_you_veteran, :member_application_harp, :member_application_hcbs, :member_application_abuse_history_alcohol,
         :member_application_abuse_history_drugs, :member_application_ever_in_treatment, :member_application_currently_in_treatment,
         :member_application_interested_in_treatment, :member_application_us_citizen, :member_application_have_children,
@@ -127,6 +145,9 @@ module Features
         .each do |n|
           select(["Yes", "No"].sample, from: (n).to_s)
         end
+
+      select "Yes", from: "member_application_reside_with_minors"
+      select "No", from: "member_application_acs_involvement"
 
       fill_in :member_application_num_years_of_work, with: Faker::Number.number(1)
 

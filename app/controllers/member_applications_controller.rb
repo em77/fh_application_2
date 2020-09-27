@@ -22,8 +22,8 @@ class MemberApplicationsController < ApplicationController
       end
     elsif file_types_valid? && MemberApplication.create(member_application_params)
       member_application.update_expiration!
-      flash.now[:notice] = "Application created successfully.<br />You can return to this form until #{member_application.application_expiration_date.strftime("%b %d, %Y")} and continue filling it out by bookmarking the current page or copying this URL:<br />#{view_context.link_to("#{edit_member_application_url(member_application)}", edit_member_application_url(member_application))}"
-      render :edit, locals: { member_application: member_application }
+      flash[:notice] = "Application created successfully.<br />You can return to this form until #{member_application.application_expiration_date.strftime("%b %d, %Y")} and continue filling it out by bookmarking the current page or copying this URL:<br />#{view_context.link_to("#{edit_member_application_url(member_application)}", edit_member_application_url(member_application))}"
+      redirect_to edit_member_application_path(member_application)
     else
       flash.now[:error] = member_application.errors.full_messages.to_sentence
       render :new, locals: { member_application: member_application }
@@ -63,8 +63,8 @@ class MemberApplicationsController < ApplicationController
       end
     elsif file_types_valid? && member_application.update(member_application_params)
       member_application.update_expiration!
-      flash.now[:notice] = "Application updated successfully.<br />You can return to this form until #{member_application.application_expiration_date.strftime("%b %d, %Y")} and continue filling it out by bookmarking the current page or copying this URL:<br />#{view_context.link_to("#{edit_member_application_url(member_application)}", edit_member_application_url(member_application))}"
-      render :edit, locals: { member_application: member_application }
+      flash[:notice] = "Application updated successfully.<br />You can return to this form until #{member_application.application_expiration_date.strftime("%b %d, %Y")} and continue filling it out by bookmarking the current page or copying this URL:<br />#{view_context.link_to("#{edit_member_application_url(member_application)}", edit_member_application_url(member_application))}"
+      redirect_to edit_member_application_path(member_application)
     else
       flash.now[:error] = member_application.errors.full_messages.to_sentence
       render :edit, locals: { member_application: member_application }

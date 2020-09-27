@@ -78,7 +78,7 @@ document.addEventListener("turbolinks:load", () => {
   });
 
   // Hide ACS involvement field if not residing with minors
-  $("#member_application_reside_with_minors").change(function() {
+  function resideWithMinors() {
     var selected;
     selected = $("#member_application_reside_with_minors option:selected").text();
     if (selected === "Yes") {
@@ -86,12 +86,18 @@ document.addEventListener("turbolinks:load", () => {
     } else {
       $("#acs-select").hide();
     }
+  }
+
+  $("#member_application_reside_with_minors").change(function() {
+    resideWithMinors();
   });
+
+  resideWithMinors();
 
   // Hide insurance number field if insurance is "None", hide other_insurance
   // field unless "Other" is selected, and hide medicaid_comp field if it isn't
   // selected
-  $("#member_application_insurance_name").change(function() {
+  function insuranceName() {
     var selected;
     selected = $("#member_application_insurance_name option:selected").text();
     if (selected === "None") {
@@ -111,7 +117,13 @@ document.addEventListener("turbolinks:load", () => {
       $("#insurance-other").hide();
       $("#medicaid-managed").hide();
     }
+  }
+
+  $("#member_application_insurance_name").change(function() {
+    insuranceName();
   });
+
+  insuranceName();
 
   $("form").submit(function(e) {
     // Progress overlay

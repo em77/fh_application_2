@@ -11,8 +11,8 @@
         </div>
         <% unless controller.action_name == "show" %>
           <div class="card-body">
-            <button type="button" class="btn btn-light" id="psych_eval_field_opener">
-              <i class="fas fa-chevron-down"></i> <b>Upload a different file</b> <i class="fas fa-chevron-down"></i>
+            <button type="button" class="btn btn-secondary" id="psych_eval_field_opener">
+              <i class="fas fa-chevron-down"></i> <b>Click to upload a different file</b> <i class="fas fa-chevron-down"></i>
             </button>
             <div id="psych_eval_field" class="file-upload-field">
               <%= f.file_field :psych_eval, label: sanitize("Please attach a current" +
@@ -37,8 +37,8 @@
         </div>
         <% unless controller.action_name == "show" %>
           <div class="card-body">
-            <button type="button" class="btn btn-light" id="psych_social_field_opener">
-              <i class="fas fa-chevron-down"></i> <b>Upload a different file</b> <i class="fas fa-chevron-down"></i>
+            <button type="button" class="btn btn-secondary" id="psych_social_field_opener">
+              <i class="fas fa-chevron-down"></i> <b>Click to upload a different file</b> <i class="fas fa-chevron-down"></i>
             </button>
             <div id="psych_social_field" class="file-upload-field">
               <%= f.file_field :psych_social, label: sanitize("Please attach a current" +
@@ -63,8 +63,8 @@
         </div>
         <% unless controller.action_name == "show" %>
           <div class="card-body">
-            <button type="button" class="btn btn-light" id="insurance_card_field_opener">
-              <i class="fas fa-chevron-down"></i> <b>Upload a different file</b> <i class="fas fa-chevron-down"></i>
+            <button type="button" class="btn btn-secondary" id="insurance_card_field_opener">
+              <i class="fas fa-chevron-down"></i> <b>Click to upload a different file</b> <i class="fas fa-chevron-down"></i>
             </button>
             <div id="insurance_card_field" class="file-upload-field">
               <%= f.file_field :insurance_card, label: "Please attach a current insurance card" %>
