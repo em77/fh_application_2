@@ -18,8 +18,6 @@ window.moment = moment;
 // Date picker - flatpickr
 import flatpickr from 'flatpickr';
 require("flatpickr/dist/flatpickr.css");
-import monthSelect from 'flatpickr/dist/plugins/monthSelect';
-import 'flatpickr/dist/plugins/monthSelect/style.css';
 
 // Make file input dynamic
 import bsCustomFileInput from 'bs-custom-file-input';
