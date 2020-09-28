@@ -10,7 +10,6 @@ require("@rails/activestorage").start()
 require("jquery");
 
 import 'bootstrap';
-import "@fortawesome/fontawesome-free/js/all";
 import '../stylesheets/application';
 
 import moment from 'moment';
@@ -24,6 +23,20 @@ import 'flatpickr/dist/plugins/monthSelect/style.css';
 
 // Make file input dynamic
 import bsCustomFileInput from 'bs-custom-file-input';
+
+// begin Fontawesome setup
+import { library, dom } from '@fortawesome/fontawesome-svg-core'
+
+import { faSyncAlt } from '@fortawesome/free-solid-svg-icons/faSyncAlt'
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons/faChevronDown'
+
+library.add(
+  faSyncAlt,
+  faChevronDown
+)
+
+dom.watch()
+// end Fontawesome setup
 
 document.addEventListener("turbolinks:load", () => {
   flatpickr("[data-behavior='flatpickr']", {
