@@ -12,7 +12,7 @@ class MemberApplicationsController < ApplicationController
     @member_application = MemberApplication.new(member_application_params)
 
     if params[:commit] == "Submit Application"
-      if file_types_valid? && MemberApplication.create(member_application_params.merge(application_status: "submitted"))
+      if file_types_valid? && member_application.update_attributes(application_status: "submitted")
         member_application.finalize!
         flash[:success] = "Your application was submitted successfully"
         redirect_to member_application_path(member_application)
@@ -20,7 +20,7 @@ class MemberApplicationsController < ApplicationController
         flash.now[:error] = member_application.errors.full_messages.to_sentence
         render :new, locals: { member_application: member_application }
       end
-    elsif file_types_valid? && MemberApplication.create(member_application_params)
+    elsif file_types_valid? && member_application.save
       member_application.update_expiration!
       flash[:notice] = "Application created successfully.<br />You can return to this form until #{member_application.application_expiration_date.strftime("%b %d, %Y")} and continue filling it out by bookmarking the current page or copying this URL:<br />#{view_context.link_to("#{edit_member_application_url(member_application)}", edit_member_application_url(member_application))}"
       redirect_to edit_member_application_path(member_application)
@@ -52,6 +52,7 @@ class MemberApplicationsController < ApplicationController
       flash[:error] = "You cannot update an application once it's submitted"
       redirect_to member_application_path(member_application) and return
     end
+
     if params[:commit] == "Submit Application"
       if file_types_valid? && member_application.update(member_application_params.merge(application_status: "submitted"))
         member_application.finalize!
@@ -78,7 +79,8 @@ class MemberApplicationsController < ApplicationController
   end
 
   def attachment_file_type(attachment_name)
-    Terrapin::CommandLine.new("file", "-b --mime-type #{params["member_application"][attachment_name].tempfile.path}").run.chomp
+    line = Terrapin::CommandLine.new("file", "-b --mime-type :filename")
+    line.run(filename: params["member_application"][attachment_name].tempfile.path).chomp
   end
 
   def file_types_valid?
