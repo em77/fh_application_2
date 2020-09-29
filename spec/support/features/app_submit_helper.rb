@@ -12,7 +12,6 @@ module Features
       else
         dob = Faker::Date.between(from: 40.years.ago, to: 20.years.ago).strftime("%B %d, %Y")
         fill_in "Date of Birth", with: dob
-        byebug
       end
 
       fill_in "SSN", with: Faker::Number.number(digits: 9)
