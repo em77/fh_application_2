@@ -3,6 +3,7 @@ module ApplicationHelper
     case flash_type
       when :notice then "alert alert-info"
       when :success then "alert alert-success"
+      when :secondary then "alert alert-secondary"
       when :error then "alert alert-danger"
       when :alert then "alert alert-warning"
     end
