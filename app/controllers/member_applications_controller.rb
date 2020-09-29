@@ -12,7 +12,7 @@ class MemberApplicationsController < ApplicationController
     @member_application = MemberApplication.new(member_application_params)
 
     if params[:commit] == "Submit Application"
-      if file_types_valid? && member_application.update_attributes(application_status: "submitted")
+      if file_types_valid? && member_application.update(application_status: "submitted")
         member_application.finalize!
         flash[:success] = "Your application was submitted successfully"
         redirect_to member_application_path(member_application)
