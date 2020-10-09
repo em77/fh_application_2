@@ -48,6 +48,10 @@ body {
   margin-bottom: 1.5%;
 }
 
+.pdf-section {
+  page-break-after: always;
+}
+
 .required-fields-warning {
   color: #E30000;
   font-weight: bold;

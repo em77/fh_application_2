@@ -74,6 +74,11 @@ class MemberApplicationsController < ApplicationController
     end
   end
 
+  def pdf
+    grover = Grover.new("#{request.base_url}/member_applications/#{member_application.id}")
+    send_data(grover.to_pdf, filename: "#{member_application.first_name}_#{member_application.last_name}_#{member_application.id}.pdf", type: "application/pdf")
+  end
+
   private
 
   def member_application

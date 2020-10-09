@@ -1,9 +1,17 @@
-<div class="card" id="attachments-section">
+<div class="card pdf-section" id="attachments-section">
   <div class="card-header bg-info text-white">
     <h4 class="card-title">Attachments</h4>
   </div>
 
   <div class="card-body">
+    <% if member_application.submitted? %>
+      <div class="card border-info">
+        <div class="card-header">
+          <%= link_to "Download a copy", pdf_path(id: member_application.id), target: "_blank" %> of this application page as a PDF
+        </div>
+      </div>
+    <% end %>
+
     <div class="card border-info">
       <% if member_application.psych_eval.try(:persisted?) %>
         <div class="card-header" id="psych_eval_header">

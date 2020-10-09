@@ -40,7 +40,7 @@
 
   <%= render partial: "attachments", locals: { f: f, member_application: member_application } %>
 
-  <div class="card">
+  <div class="card pdf-section">
     <div class="card-header bg-info text-white">
       <h4 class="card-title">Prospective Member</h4>
     </div>
@@ -68,7 +68,7 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card pdf-section">
     <div class="card-header bg-info text-white">
       <h4 class="card-title">Address</h4>
     </div>
@@ -100,7 +100,7 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card pdf-section">
     <div class="card-header bg-info text-white">
       <h4 class="card-title">Who is recommending you?</h4>
     </div>
@@ -122,7 +122,7 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card pdf-section">
     <div class="card-header bg-info text-white">
       <h4 class="card-title">Fountain House Tour</h4>
     </div>
@@ -145,7 +145,7 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card pdf-section">
     <div class="card-header bg-info text-white">
       <h4 class="card-title">Main Goals</h4>
     </div>
@@ -170,7 +170,7 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card pdf-section">
     <div class="card-header bg-info text-white">
       <h4 class="card-title">Housing</h4>
     </div>
@@ -209,7 +209,7 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card pdf-section">
     <div class="card-header bg-info text-white">
       <h4 class="card-title">Income</h4>
       <h5 class="card-text">
@@ -252,86 +252,88 @@
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-header bg-info text-white">
-      <h4 class="card-title">Ethnicity (check all that apply)</h4>
-    </div>
+  <div class="card pdf-section">
+    <div class="card">
+      <div class="card-header bg-info text-white">
+        <h4 class="card-title">Ethnicity (check all that apply)</h4>
+      </div>
 
-    <div class="card-body">
-      <div class="card">
-        <div class="card-body">
-          <%= f.form_group do %>
-            <%= f.check_box :eth_aa, label: "Black (African-American)", inline: true %>
+      <div class="card-body">
+        <div class="card">
+          <div class="card-body">
+            <%= f.form_group do %>
+              <%= f.check_box :eth_aa, label: "Black (African-American)", inline: true %>
 
-            <%= f.check_box :eth_aa_carrib, label: "Black (Afro-Carribean)", inline: true %>
+              <%= f.check_box :eth_aa_carrib, label: "Black (Afro-Carribean)", inline: true %>
 
-            <%= f.check_box :eth_aa_ac, label: "Black (African Continent)", inline: true %>
+              <%= f.check_box :eth_aa_ac, label: "Black (African Continent)", inline: true %>
 
-            <%= f.check_box :eth_black_other, label: "Black (Other)", inline: true %>
+              <%= f.check_box :eth_black_other, label: "Black (Other)", inline: true %>
 
-            <%= f.check_box :eth_cuban, label: "Hispanic (Cuban)", inline: true %>
+              <%= f.check_box :eth_cuban, label: "Hispanic (Cuban)", inline: true %>
 
-            <%= f.check_box :eth_mex, label: "Hispanic (Mexican)", inline: true %>
+              <%= f.check_box :eth_mex, label: "Hispanic (Mexican)", inline: true %>
 
-            <%= f.check_box :eth_pr, label: "Hispanic (Puerto Rican)", inline: true %>
+              <%= f.check_box :eth_pr, label: "Hispanic (Puerto Rican)", inline: true %>
 
-            <%= f.check_box :eth_dom, label: "Hispanic (Dominican)", inline: true %>
+              <%= f.check_box :eth_dom, label: "Hispanic (Dominican)", inline: true %>
 
-            <%= f.check_box :eth_sa, label: "Hispanic (South American)", inline: true %>
+              <%= f.check_box :eth_sa, label: "Hispanic (South American)", inline: true %>
 
-            <%= f.check_box :eth_ca, label: "Hispanic (Central American)", inline: true %>
+              <%= f.check_box :eth_ca, label: "Hispanic (Central American)", inline: true %>
 
-            <%= f.check_box :eth_pi, label: "Pacific Islander / Native Hawaiian", inline: true %>
+              <%= f.check_box :eth_pi, label: "Pacific Islander / Native Hawaiian", inline: true %>
 
-            <%= f.check_box :eth_na, label: "Native American / American Indian", inline: true %>
+              <%= f.check_box :eth_na, label: "Native American / American Indian", inline: true %>
 
-            <%= f.check_box :eth_asian_fe, label: "Asian (Far East)", inline: true %>
+              <%= f.check_box :eth_asian_fe, label: "Asian (Far East)", inline: true %>
 
-            <%= f.check_box :eth_asian_se, label: "Asian (South East)", inline: true %>
+              <%= f.check_box :eth_asian_se, label: "Asian (South East)", inline: true %>
 
-            <%= f.check_box :eth_asian_is, label: "Asian (Indian subcontinent)", inline: true %>
+              <%= f.check_box :eth_asian_is, label: "Asian (Indian subcontinent)", inline: true %>
 
-            <%= f.check_box :eth_white_na, label: "White (North African)", inline: true %>
+              <%= f.check_box :eth_white_na, label: "White (North African)", inline: true %>
 
-            <%= f.check_box :eth_white_me, label: "White (Middle Eastern)", inline: true %>
+              <%= f.check_box :eth_white_me, label: "White (Middle Eastern)", inline: true %>
 
-            <%= f.check_box :eth_white_amer, label: "White (American)", inline: true %>
+              <%= f.check_box :eth_white_amer, label: "White (American)", inline: true %>
 
-            <%= f.check_box :eth_white_eu, label: "White (European)", inline: true %>
+              <%= f.check_box :eth_white_eu, label: "White (European)", inline: true %>
 
-            <%= f.check_box :eth_white_other, label: "White (Other)", inline: true %>
-          <% end %>
+              <%= f.check_box :eth_white_other, label: "White (Other)", inline: true %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="card">
-    <div class="card-header bg-info text-white">
-      <h4 class="card-title">Demographic Info</h4>
-    </div>
+    <div class="card">
+      <div class="card-header bg-info text-white">
+        <h4 class="card-title">Demographic Info</h4>
+      </div>
 
-    <div class="card-body">
-      <%= f.text_field :other_language,
-        label: "Primary language (if other than English)" %>
+      <div class="card-body">
+        <%= f.text_field :other_language,
+          label: "Primary language (if other than English)" %>
 
-      <%= f.select :marital_status, [
-          "Single, Never Married",
-          "Married",
-          "Permanent Partner",
-          "Separated",
-          "Divorced",
-          "Widowed"
-        ],
-        { label: "Marital Status", include_blank: true }, { required: true } %>
+        <%= f.select :marital_status, [
+            "Single, Never Married",
+            "Married",
+            "Permanent Partner",
+            "Separated",
+            "Divorced",
+            "Widowed"
+          ],
+          { label: "Marital Status", include_blank: true }, { required: true } %>
 
-      <%= f.select :have_children, ["No", "Yes"], { label: "Do you have any children?", include_blank: true }, { required: true } %>
+        <%= f.select :have_children, ["No", "Yes"], { label: "Do you have any children?", include_blank: true }, { required: true } %>
 
-      <%= f.text_field :children_number, label: "If yes, how many?" %>
+        <%= f.text_field :children_number, label: "If yes, how many?" %>
 
-      <%= f.select :are_you_veteran, ["No", "Yes"], { label: "Are you a veteran?", include_blank: true }, { required: true } %>
+        <%= f.select :are_you_veteran, ["No", "Yes"], { label: "Are you a veteran?", include_blank: true }, { required: true } %>
 
-      <%= f.select :us_citizen, ["No", "Yes"], { label: "Are you a U.S. citizen?", include_blank: true }, { required: true } %>
+        <%= f.select :us_citizen, ["No", "Yes"], { label: "Are you a U.S. citizen?", include_blank: true }, { required: true } %>
+      </div>
     </div>
   </div>
 
@@ -346,7 +348,7 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card pdf-section">
     <div class="card-header bg-info text-white">
       <h4 class="card-title">Employment History</h4>
     </div>
@@ -356,7 +358,7 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card pdf-section">
     <div class="card-header bg-info text-white">
       <h4 class="card-title">Medical Alerts</h4>
       <h5 class="card-text">(check all that apply)</h5>
@@ -392,7 +394,7 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card pdf-section">
     <div class="card-header bg-info text-white">
       <h4 class="card-title">Psychiatric/NP Contact</h4>
     </div>
@@ -414,7 +416,7 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card pdf-section">
     <div class="card-header bg-info text-white">
       <h4 class="card-title">Therapist Contact</h4>
     </div>
@@ -435,7 +437,7 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card pdf-section">
     <div class="card-header bg-info text-white">
       <h4 class="card-title">Medical Contact</h4>
     </div>
@@ -453,7 +455,7 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card pdf-section">
     <div class="card-header bg-info text-white">
       <h4 class="card-title">Emergency Contacts</h4>
     </div>
@@ -474,7 +476,7 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card pdf-section">
     <div class="card-header bg-info text-white">
       <h4 class="card-title">Medical Insurance</h4>
     </div>
@@ -524,7 +526,7 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card pdf-section">
     <div class="card-header bg-info text-white">
       <h4 class="card-title">Diagnosis</h4>
     </div>
@@ -533,7 +535,7 @@
     </div>
   </div>  
 
-  <div class="card">
+  <div class="card pdf-section">
     <div class="card-header bg-info text-white">
       <h4 class="card-title">Medication Information</h4>
       <h5 class="card-text">Please list all medications you are currently
@@ -544,7 +546,7 @@
     </div>
   </div>  
 
-  <div class="card">
+  <div class="card pdf-section">
     <div class="card-header bg-info text-white">
       <h4 class="card-title">Psychiatric Hospitalizations</h4>
       <h5 class="card-text">Please list your first and most recent hospitalization, indicating the name of hospital and <em>approximate</em> dates.</h5>
@@ -607,7 +609,7 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card pdf-section">
     <div class="card-header bg-info text-white">
       <h4 class="card-title">Substance Abuse History</h4>
     </div>
@@ -642,7 +644,7 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card pdf-section">
     <div class="card-header bg-info text-white">
       <h4 class="card-title">Legal History</h4>
     </div>
@@ -652,42 +654,46 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card pdf-section">
     <div class="card-header bg-info text-white">
       <h4 class="card-title">Questionnaires</h4>
       <h5 class="card-text">The following are two surveys and a questionnaire. They are required by one of our funding sources. Please note that your answers to these questions do not affect your acceptance to Fountain House.</h5>
     </div>
 
     <div class="card-body">
-      <p>Please answer the following questions:</p>
-      <br>
-      <%= f.select :get_needs_met, ["Not at all", "Somewhat", "Mostly", "Completely"], { label: "I get important needs of mine met by my current community", include_blank: true }, { required: true } %>
+      <div class="pdf-section">
+        <p>Please answer the following questions:</p>
+        <br>
+        <%= f.select :get_needs_met, ["Not at all", "Somewhat", "Mostly", "Completely"], { label: "I get important needs of mine met by my current community", include_blank: true }, { required: true } %>
 
-      <%= f.select :feel_part, ["Not at all", "Somewhat", "Mostly", "Completely"], { label: "It is important for me to feel a part of a community", include_blank: true }, { required: true } %>
-    
-      <%= f.select :lack_companion, ["Hardly ever", "Some of the time", "Mostly", "Completely"], { label: "How often do you feel that you lack companionship?", include_blank: true }, { required: true } %>
+        <%= f.select :feel_part, ["Not at all", "Somewhat", "Mostly", "Completely"], { label: "It is important for me to feel a part of a community", include_blank: true }, { required: true } %>
+      
+        <%= f.select :lack_companion, ["Hardly ever", "Some of the time", "Mostly", "Completely"], { label: "How often do you feel that you lack companionship?", include_blank: true }, { required: true } %>
 
-      <%= f.select :left_out, ["Hardly ever", "Some of the time", "Mostly", "Completely"], { label: "How often do you feel left out?", include_blank: true }, { required: true } %>
+        <%= f.select :left_out, ["Hardly ever", "Some of the time", "Mostly", "Completely"], { label: "How often do you feel left out?", include_blank: true }, { required: true } %>
 
-      <%= f.select :feel_isolated, ["Hardly ever", "Some of the time", "Mostly", "Completely"], { label: "How often do you feel isolated from others?", include_blank: true }, { required: true } %>
-    
-      <p>Taking everything into consideration, during the past week how satisfied have you been with your...</p>
-      <br>
-      <%= f.select :satisfaction_physical_health, ["Very poor", "Poor", "Fair", "Good", "Very good"], { label: "...physical health?", include_blank: true }, { required: true } %>
-      <%= f.select :satisfaction_mood, ["Very poor", "Poor", "Fair", "Good", "Very good"], { label: "...mood?", include_blank: true }, { required: true } %>
-      <%= f.select :satisfaction_work, ["Very poor", "Poor", "Fair", "Good", "Very good"], { label: "...work?", include_blank: true }, { required: true } %>
-      <%= f.select :satisfaction_household, ["Very poor", "Poor", "Fair", "Good", "Very good"], { label: "...household activities?", include_blank: true }, { required: true } %>
-      <%= f.select :satisfaction_social, ["Very poor", "Poor", "Fair", "Good", "Very good"], { label: "...social relationships?", include_blank: true }, { required: true } %>
-      <%= f.select :satisfaction_family, ["Very poor", "Poor", "Fair", "Good", "Very good"], { label: "...family relationships?", include_blank: true }, { required: true } %>
-      <%= f.select :satisfaction_leisure, ["Very poor", "Poor", "Fair", "Good", "Very good"], { label: "...leisure time activities?", include_blank: true }, { required: true } %>
-      <%= f.select :satisfaction_function, ["Very poor", "Poor", "Fair", "Good", "Very good"], { label: "...ability to function in daily life?", include_blank: true }, { required: true } %>
-      <%= f.select :satisfaction_economic, ["Very poor", "Poor", "Fair", "Good", "Very good"], { label: "...economic status?", include_blank: true }, { required: true } %>
-      <%= f.select :satisfaction_living_sit, ["Very poor", "Poor", "Fair", "Good", "Very good"], { label: "...living/housing situation?", include_blank: true }, { required: true } %>
-      <%= f.select :satisfaction_get_around, ["Very poor", "Poor", "Fair", "Good", "Very good"], { label: "...ability to get around physically without feeling dizzy, unsteady, or falling?", include_blank: true }, { required: true } %>
-      <%= f.select :satisfaction_vision, ["Very poor", "Poor", "Fair", "Good", "Very good"], { label: "...vision in terms of ability to do work or hobbies?", include_blank: true }, { required: true } %>
-      <%= f.select :satisfaction_overall_sense, ["Very poor", "Poor", "Fair", "Good", "Very good"], { label: "...overall sense of well-being?", include_blank: true }, { required: true } %>
-      <%= f.select :satisfaction_medication, ["Very poor", "Poor", "Fair", "Good", "Very good"], { label: "...medication? (If not taking any, leave this blank)", include_blank: true }, { required: true } %>
-      <%= f.select :satisfaction_overall_life, ["Very poor", "Poor", "Fair", "Good", "Very good"], { label: "...overall life satisfaction and contentment?", include_blank: true }, { required: true } %>
+        <%= f.select :feel_isolated, ["Hardly ever", "Some of the time", "Mostly", "Completely"], { label: "How often do you feel isolated from others?", include_blank: true }, { required: true } %>
+      </div>
+
+      <div class="pdf-section">
+        <p>Taking everything into consideration, during the past week how satisfied have you been with your...</p>
+        <br>
+        <%= f.select :satisfaction_physical_health, ["Very poor", "Poor", "Fair", "Good", "Very good"], { label: "...physical health?", include_blank: true }, { required: true } %>
+        <%= f.select :satisfaction_mood, ["Very poor", "Poor", "Fair", "Good", "Very good"], { label: "...mood?", include_blank: true }, { required: true } %>
+        <%= f.select :satisfaction_work, ["Very poor", "Poor", "Fair", "Good", "Very good"], { label: "...work?", include_blank: true }, { required: true } %>
+        <%= f.select :satisfaction_household, ["Very poor", "Poor", "Fair", "Good", "Very good"], { label: "...household activities?", include_blank: true }, { required: true } %>
+        <%= f.select :satisfaction_social, ["Very poor", "Poor", "Fair", "Good", "Very good"], { label: "...social relationships?", include_blank: true }, { required: true } %>
+        <%= f.select :satisfaction_family, ["Very poor", "Poor", "Fair", "Good", "Very good"], { label: "...family relationships?", include_blank: true }, { required: true } %>
+        <%= f.select :satisfaction_leisure, ["Very poor", "Poor", "Fair", "Good", "Very good"], { label: "...leisure time activities?", include_blank: true }, { required: true } %>
+        <%= f.select :satisfaction_function, ["Very poor", "Poor", "Fair", "Good", "Very good"], { label: "...ability to function in daily life?", include_blank: true }, { required: true } %>
+        <%= f.select :satisfaction_economic, ["Very poor", "Poor", "Fair", "Good", "Very good"], { label: "...economic status?", include_blank: true }, { required: true } %>
+        <%= f.select :satisfaction_living_sit, ["Very poor", "Poor", "Fair", "Good", "Very good"], { label: "...living/housing situation?", include_blank: true }, { required: true } %>
+        <%= f.select :satisfaction_get_around, ["Very poor", "Poor", "Fair", "Good", "Very good"], { label: "...ability to get around physically without feeling dizzy, unsteady, or falling?", include_blank: true }, { required: true } %>
+        <%= f.select :satisfaction_vision, ["Very poor", "Poor", "Fair", "Good", "Very good"], { label: "...vision in terms of ability to do work or hobbies?", include_blank: true }, { required: true } %>
+        <%= f.select :satisfaction_overall_sense, ["Very poor", "Poor", "Fair", "Good", "Very good"], { label: "...overall sense of well-being?", include_blank: true }, { required: true } %>
+        <%= f.select :satisfaction_medication, ["Very poor", "Poor", "Fair", "Good", "Very good"], { label: "...medication? (If not taking any, leave this blank)", include_blank: true }, { required: true } %>
+        <%= f.select :satisfaction_overall_life, ["Very poor", "Poor", "Fair", "Good", "Very good"], { label: "...overall life satisfaction and contentment?", include_blank: true }, { required: true } %>
+      </div>
 
       <div class="card">
         <div class="card-body">
@@ -699,7 +705,7 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card pdf-section">
     <div class="card-header bg-info text-white">
       <h4 class="card-title">Signature</h4>
     </div>
