@@ -2,7 +2,8 @@ class MemberApplicationsController < ApplicationController
   FILE_TYPE_WHITELIST = ["application/pdf",
                          "application/msword",
                          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                         "image/jpeg"].freeze
+                         "image/jpeg",
+                         "image/png"].freeze
 
   def new
     render :new, locals: { member_application: MemberApplication.new }
@@ -94,7 +95,7 @@ class MemberApplicationsController < ApplicationController
     ["psych_eval", "psych_social", "insurance_card"].each do |attachment_name|
       next if params["member_application"][attachment_name].blank?
       unless FILE_TYPE_WHITELIST.include?(attachment_file_type(attachment_name))
-        member_application.errors.add(attachment_name, "must be an accepted file type (.pdf, .doc, .docx, .jpg)")
+        member_application.errors.add(attachment_name, "must be an accepted file type (.pdf, .doc, .docx, .jpg, .png)")
       end
     end
     member_application.errors.none?

@@ -57,7 +57,7 @@ feature "app submit" do
 
     sleep 10
 
-    expect(page).to have_content ("Psychosocial History must be an accepted file type (.pdf, .doc, .docx, .jpg)")
+    expect(page).to have_content ("Psychosocial History must be an accepted file type (.pdf, .doc, .docx, .jpg, .png)")
     expect(ActionMailer::Base.deliveries).to be_empty
   end
 
