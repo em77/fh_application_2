@@ -28,6 +28,8 @@ import { library, dom } from '@fortawesome/fontawesome-svg-core'
 import { faSyncAlt } from '@fortawesome/free-solid-svg-icons/faSyncAlt'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons/faChevronDown'
 
+import 'jquery-input-mask-phone-number';
+
 library.add(
   faSyncAlt,
   faChevronDown
@@ -57,6 +59,9 @@ document.addEventListener("turbolinks:load", () => {
   });
 
   bsCustomFileInput.init();
+
+  // Enforce phone number field
+  $("#member_application_phone_number").usPhoneFormat();
 
   // Auto-fill age field from DOB
   $("#dob-field").next().on("blur", function() {

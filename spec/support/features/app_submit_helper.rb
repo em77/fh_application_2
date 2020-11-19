@@ -83,7 +83,7 @@ module Features
       [:member_application_phone_number, :member_application_recommend_phone_number, :member_application_psych_phone, :member_application_therapist_phone,
         :member_application_primary_care_phone, :member_application_emerg_primary_phone, :member_application_emerg_secondary_phone]
         .each do |n|
-          fill_in n, with: Faker::PhoneNumber.phone_number
+          fill_in n, with: Faker::Number.number(digits: 10)
         end
       [:member_application_street_address, :member_application_psych_address, :member_application_therapist_address,
         :member_application_primary_care_address]
@@ -150,7 +150,7 @@ module Features
       select "Yes", from: "member_application_reside_with_minors"
       select "No", from: "member_application_acs_involvement"
 
-      fill_in :member_application_num_years_of_work, with: Faker::Number.number(1)
+      fill_in :member_application_num_years_of_work, with: Faker::Number.number(digits: 1)
 
       [:member_application_eth_aa,
         :member_application_med_alert_deaf, :member_application_med_alert_asthma,

@@ -16,6 +16,8 @@ months-only date
   ssn client side pattern matching
   <%= f.text_field :ssn, label: "SSN", pattern: "^[0-9]{9}$", title: "must be a 9 digit number" %>
 
+  <%= f.phone_field :the_number %>
+
   <%= f.submit %>
 <% end %>
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_27_232156) do
+ActiveRecord::Schema.define(version: 2020_11_11_005207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -248,6 +248,7 @@ ActiveRecord::Schema.define(version: 2020_09_27_232156) do
     t.integer "eth_white_amer"
     t.integer "eth_white_eu"
     t.integer "eth_white_other"
+    t.string "phone_number_type", default: "unknown"
   end
 
 end

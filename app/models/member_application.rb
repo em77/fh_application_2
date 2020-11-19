@@ -14,6 +14,9 @@ class MemberApplication < ApplicationRecord
   validates :age, format: { with: /\A(1[89]|[2-9][0-9]|1[0-3][0-9]|140)\z/,
     message: "must be 18 or older to apply (adjust Date of Birth to change)" }, unless: :is_draft?
 
+  validates :phone_number, format: { with: /\A[0-9]{3}-[0-9]{3}-[0-9]{4}\z/,
+    message: "must be a 10 digit phone number (example: 555-666-7777)" }, unless: :is_draft?
+
   validates :first_name, :last_name, :dob, :age, :ssn, :gender,
     :street_address, :city, :state, :zip_code, :phone_number,
     :residence_time_length, :recommend_name, :recommend_agency,
@@ -47,10 +50,19 @@ class MemberApplication < ApplicationRecord
     self.update(
       referral_signature_date: today,
       member_signature_date: today,
-      application_expiration_date: today + 60.days
+      application_expiration_date: today + 60.days,
+      phone_number_type: twilio_phone_number_type
     )
     ApplicationLog.create
     MemberApplicationMailer.new_member_application(self).deliver_later
+  end
+
+  def twilio_phone_number_type
+    client = Twilio::REST::Client.new(Rails.application.credentials.dig(:twilio, :account_sid), Rails.application.credentials.dig(:twilio, :auth_token))
+    number = client.lookups
+                   .phone_numbers("+1#{self.phone_number.gsub('-', '')}")
+                   .fetch(type: ['carrier'])
+    number.try(:carrier).try(:[], 'type') || "unknown"
   end
 
   def update_expiration!

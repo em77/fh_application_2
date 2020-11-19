@@ -27,6 +27,8 @@ gem 'bootstrap_form'
 
 gem 'aws-sdk-s3'
 
+gem 'twilio-ruby'
+
 gem 'active_storage_validations'
 
 # Reduces boot times through caching; required in config/boot.rb

@@ -20,6 +20,8 @@ feature "app submit" do
     )
     fill_out_app(true)
 
+    expect_any_instance_of(Twilio::REST::Client).to receive_message_chain('lookups.phone_numbers.fetch').and_return({ 'type' => 'mobile' })
+
     accept_confirm do
       click_on "Submit Application"
     end
@@ -77,6 +79,7 @@ feature "app submit" do
 
     fill_out_app(true)
     click_on "Save Draft"
+
     expect(page).to have_content ("You can return to this form until")
     expect(ActionMailer::Base.deliveries).to be_empty
 
@@ -85,6 +88,8 @@ feature "app submit" do
       Rails.root.join("lib/sample_attachments/sun.jpg"),
       make_visible: true
     )
+
+    expect_any_instance_of(Twilio::REST::Client).to receive_message_chain('lookups.phone_numbers.fetch').and_return({ 'type' => 'mobile' })
 
     accept_confirm do
       click_on "Submit Application"
