@@ -88,6 +88,17 @@
       <%= f.text_field :zip_code, label: "Zip code", required: true %>
 
       <%= f.phone_field :phone_number, label: "Phone number", required: true %>
+      <% if member_application.submitted? %>
+        <h4>
+          <span class="badge badge-info">
+            Phone number type:
+            <span class="badge badge-light">
+              <%= member_application.phone_number_type.capitalize %>
+            </span>
+          </span>
+        </h4>
+        <br>
+      <% end %>
 
       <%= f.text_field :county, label: "County" %>
 
