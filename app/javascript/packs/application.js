@@ -31,6 +31,8 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons/faCheckCircle'
 
 import 'jquery-input-mask-phone-number';
 
+import autosize from 'autosize';
+
 library.add(
   faSyncAlt,
   faChevronDown,
@@ -47,6 +49,9 @@ document.addEventListener("turbolinks:load", () => {
     altFormat: "F j, Y",
     dateFormat: "Y-m-d"
   });
+
+  // Expand all textareas to the size of their text
+  autosize($('textarea'));
 
   // Disable enter key except for textareas
   $(document).on("keydown", ":input:not(textarea)", function(event) {
