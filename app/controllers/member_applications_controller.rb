@@ -16,7 +16,7 @@ class MemberApplicationsController < ApplicationController
       if file_types_valid? && member_application.update(application_status: "submitted")
         member_application.finalize!
         flash[:success] = "Your application was submitted successfully"
-        redirect_to member_application_path(member_application)
+        redirect_to member_application_path(member_application, just_submitted: true)
       else
         flash.now[:error] = member_application.errors.full_messages.to_sentence
         render :new, locals: { member_application: member_application }
@@ -60,7 +60,7 @@ class MemberApplicationsController < ApplicationController
       if file_types_valid? && member_application.update(member_application_params.merge(application_status: "submitted"))
         member_application.finalize!
         flash[:success] = "Your application was submitted successfully"
-        redirect_to member_application_path(member_application)
+        redirect_to member_application_path(member_application, just_submitted: true)
       else
         flash.now[:error] = member_application.errors.full_messages.to_sentence
         render :edit, locals: { member_application: member_application }
@@ -105,7 +105,7 @@ class MemberApplicationsController < ApplicationController
     params.require(:member_application).permit(
       :psych_social, :psych_eval, :insurance_card,
       :ssn, :first_name, :last_name, :mi, :dob, :age, :gender, :street_address,
-      :apt, :city, :state, :zip_code, :phone_number, :county, :residence_time_length,
+      :apt, :city, :state, :zip_code, :phone_number_landline, :phone_number_cell, :county, :residence_time_length,
       :email_address, :recommend_name, :recommend_agency, :recommend_phone_number,
       :recommend_agency_type, :recommend_known_length, :who_live_with, :ssi, :family_income,
       :veteran_benefits, :ssdi, :snap, :public_assistance, :wages, :retirement_benefits,

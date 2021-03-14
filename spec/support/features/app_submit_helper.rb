@@ -80,7 +80,7 @@ module Features
         .each do |n|
           fill_in n, with: Faker::Company.name
         end
-      [:member_application_phone_number, :member_application_recommend_phone_number, :member_application_psych_phone, :member_application_therapist_phone,
+      [:member_application_phone_number_landline, :member_application_phone_number_cell, :member_application_recommend_phone_number, :member_application_psych_phone, :member_application_therapist_phone,
         :member_application_primary_care_phone, :member_application_emerg_primary_phone, :member_application_emerg_secondary_phone]
         .each do |n|
           fill_in n, with: Faker::Number.number(digits: 10)

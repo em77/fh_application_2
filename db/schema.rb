@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_11_005207) do
+ActiveRecord::Schema.define(version: 2021_03_13_221350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2020_11_11_005207) do
     t.string "city"
     t.string "state"
     t.string "zip_code"
-    t.string "phone_number"
+    t.string "phone_number_landline"
     t.string "county"
     t.string "residence_time_length"
     t.string "email_address"
@@ -248,7 +248,9 @@ ActiveRecord::Schema.define(version: 2020_11_11_005207) do
     t.integer "eth_white_amer"
     t.integer "eth_white_eu"
     t.integer "eth_white_other"
-    t.string "phone_number_type", default: "unknown"
+    t.string "phone_number_landline_type", default: "unknown"
+    t.string "phone_number_cell"
+    t.string "phone_number_cell_type", default: "unknown"
   end
 
 end

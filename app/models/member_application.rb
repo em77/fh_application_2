@@ -11,14 +11,15 @@ class MemberApplication < ApplicationRecord
   validates :ssn, format: { with: /\A[0-9]{9}\z/,
     message: "must be a 9 digit number" }, unless: :is_draft?
 
+  validate :phone_numbers
+
   validates :age, format: { with: /\A(1[89]|[2-9][0-9]|1[0-3][0-9]|140)\z/,
     message: "must be 18 or older to apply (adjust Date of Birth to change)" }, unless: :is_draft?
 
-  validates :phone_number, format: { with: /\A[0-9]{3}-[0-9]{3}-[0-9]{4}\z/,
-    message: "must be a 10 digit phone number (example: 555-666-7777)" }, unless: :is_draft?
+  validate :phone_numbers, unless: :is_draft?
 
   validates :first_name, :last_name, :dob, :age, :ssn, :gender,
-    :street_address, :city, :state, :zip_code, :phone_number,
+    :street_address, :city, :state, :zip_code,
     :residence_time_length, :recommend_name, :recommend_agency,
     :recommend_phone_number, :recommend_agency_type,
     :recommend_known_length, :tour_fh, :total_income,
@@ -51,18 +52,24 @@ class MemberApplication < ApplicationRecord
       referral_signature_date: today,
       member_signature_date: today,
       application_expiration_date: today + 60.days,
-      phone_number_type: twilio_phone_number_type
+      phone_number_landline_type: twilio_phone_number_type(self.phone_number_landline),
+      phone_number_cell_type: twilio_phone_number_type(self.phone_number_cell)
     )
     ApplicationLog.create
     MemberApplicationMailer.new_member_application(self).deliver_later
   end
 
-  def twilio_phone_number_type
+  def twilio_phone_number_type(phone_number)
+    return "unknown" if phone_number.blank?
     client = Twilio::REST::Client.new(Rails.application.credentials.dig(:twilio, :account_sid), Rails.application.credentials.dig(:twilio, :auth_token))
-    number = client.lookups
-                   .phone_numbers("+1#{self.phone_number.gsub('-', '')}")
-                   .fetch(type: ['carrier'])
-    number.try(:carrier).try(:[], 'type') || "unknown"
+    begin
+      number = client.lookups
+                     .phone_numbers("+1#{phone_number.gsub('-', '')}")
+                     .fetch(type: ['carrier'])
+      number.try(:carrier).try(:[], 'type') || "unknown"
+    rescue Twilio::REST::RestError
+      "unknown"
+    end
   end
 
   def update_expiration!
@@ -70,6 +77,20 @@ class MemberApplication < ApplicationRecord
   end
 
   private
+
+  def phone_numbers
+    if self.phone_number_landline.blank? && self.phone_number_cell.blank?
+      errors.add(:base, "Either Phone number (landline) or Phone number (cell) must be entered")
+      return
+    end
+
+    [:phone_number_landline, :phone_number_cell].each do |attribute|
+      next if self.send(attribute).blank?
+      unless self.send(attribute).match?(/\A[0-9]{3}-[0-9]{3}-[0-9]{4}\z/)
+        errors.add(attribute, "must be a 10 digit phone number (example: 555-666-7777)")
+      end
+    end
+  end
 
   def today
     Time.current.in_time_zone("Eastern Time (US & Canada)").to_date

@@ -4,6 +4,13 @@
   <p class="lead">Your application is being processed. Please do not close this page at this time.</p>
 </div>
 
+<% if member_application.submitted? %>
+  <div class="jumbotron bg-success text-white" id="submitted-jumbotron">
+    <p class="display-4">Application Submitted!</p>
+    <i class="fas fa-check-circle fa-4x"></i>
+  </div>
+<% end %>
+
 <%= bootstrap_form_for(member_application, label_col: "col-lg-1 col-xs-1",
   id:"application-form", multipart: true) do |f| %>
 
@@ -87,13 +94,26 @@
 
       <%= f.text_field :zip_code, label: "Zip code", required: true %>
 
-      <%= f.phone_field :phone_number, label: "Phone number", required: true %>
+      <%= f.phone_field :phone_number_landline, label: "Phone number (landline)" %>
       <% if member_application.submitted? %>
         <h4>
           <span class="badge badge-info">
-            Phone number type:
+            Phone number (landline) type:
             <span class="badge badge-light">
-              <%= member_application.phone_number_type.capitalize %>
+              <%= member_application.phone_number_landline_type.capitalize %>
+            </span>
+          </span>
+        </h4>
+        <br>
+      <% end %>
+
+      <%= f.phone_field :phone_number_cell, label: "Phone number (cell)" %>
+      <% if member_application.submitted? %>
+        <h4>
+          <span class="badge badge-info">
+            Phone number (cell) type:
+            <span class="badge badge-light">
+              <%= member_application.phone_number_cell_type.capitalize %>
             </span>
           </span>
         </h4>
