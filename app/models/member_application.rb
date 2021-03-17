@@ -63,7 +63,7 @@ class MemberApplication < ApplicationRecord
       phone_number_cell_type: twilio_phone_number_type(self.phone_number_cell)
     )
     ApplicationLog.create
-    MemberApplicationMailer.new_member_application(self).deliver_later
+    MemberApplicationMailer.new_member_application(self).deliver_now
     member_and_recommender_emails.each { |email| MemberApplicationMailer.submitted_application_notification(self, email).deliver_later}
   end
 
