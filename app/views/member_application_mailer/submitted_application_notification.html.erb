@@ -1,0 +1,13 @@
+<div>
+  <p>
+    Hello,
+  </p>
+
+  <p>
+    A new application to be a member of Fountain House was successfully submitted for <%= "#{@member_application.first_name} #{@member_application.last_name}" %>.
+  </p>
+
+  <p>
+    You can view the application here: <%= "https://www.#{Rails.application.credentials.sendgrid[:from_domain_name]}.org/member_applications/#{@member_application.id}" %>
+  </p>
+</div>

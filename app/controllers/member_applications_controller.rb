@@ -22,7 +22,6 @@ class MemberApplicationsController < ApplicationController
         render :new, locals: { member_application: member_application }
       end
     elsif file_types_valid? && member_application.save
-      member_application.update_expiration!
       flash[:notice] = "Application created successfully"
       redirect_to edit_member_application_path(member_application)
     else
@@ -66,7 +65,6 @@ class MemberApplicationsController < ApplicationController
         render :edit, locals: { member_application: member_application }
       end
     elsif file_types_valid? && member_application.update(member_application_params)
-      member_application.update_expiration!
       flash[:notice] = "Application updated successfully."
       redirect_to edit_member_application_path(member_application)
     else

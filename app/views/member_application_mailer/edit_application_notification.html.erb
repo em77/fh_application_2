@@ -1,0 +1,24 @@
+<div>
+  <p>Hello,</p>
+
+  <p>
+    A new application to be a member of Fountain House was started for <%= "#{@member_application.first_name} #{@member_application.last_name}" %>.
+  </p>
+
+  <p>
+    You can continue to edit the application here: <%= "https://www.#{Rails.application.credentials.sendgrid[:from_domain_name]}.org/member_applications/#{@member_application.id}" %>
+  </p>
+
+  <p>
+    If you continue the application and wish to save your changes to come back to later, you can click "Save Draft"
+    at the top of the page. If you complete your application and wish to submit it to Fountain House, you can
+    click "Submit Application" at the very bottom of the form. Your application will not be submitted to Fountain
+    House for review until you click "Submit Application".
+  </p>
+
+  <p>
+    For security purposes, this link will expire on <%= @member_application.application_expiration_date.strftime("%B %-d, %Y") %>
+    Each time you update the application, the expiration date will be moved further into the future to give you more time
+    and you can always view the current expiration date at the top of your application page.
+  </p>
+</div>

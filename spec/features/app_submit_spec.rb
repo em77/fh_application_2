@@ -81,7 +81,7 @@ feature "app submit" do
     click_on "Save Draft"
 
     expect(page).to have_content ("You can return to this form until")
-    expect(ActionMailer::Base.deliveries).to be_empty
+    expect(ActionMailer::Base.deliveries.count).to eq 2
 
     page.attach_file(
       "member_application_insurance_card",
@@ -98,6 +98,7 @@ feature "app submit" do
     sleep 10
 
     expect(page).to have_content "Your application was submitted successfully"
+    expect(ActionMailer::Base.deliveries.count).to eq 5
     mail = ActionMailer::Base.deliveries.first
     expect(mail).to_not be nil
     expect(mail.body.raw_source).to include "https://www.fhapplication.org/member_applications/#{MemberApplication.last.id}"

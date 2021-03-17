@@ -43,8 +43,15 @@ class MemberApplication < ApplicationRecord
     :felt_bad_about_substance_use, :ever_used_substances_for_hangover,
     presence: true, unless: :is_draft?
 
+  before_save :update_expiration!
+  after_create :send_edit_application_notification_email, if: :is_draft?
+
   def is_draft?
     self.draft?
+  end
+
+  def send_edit_application_notification_email
+    member_and_recommender_emails.each { |email| MemberApplicationMailer.edit_application_notification(self, email).deliver_later }
   end
 
   def finalize!
@@ -57,6 +64,11 @@ class MemberApplication < ApplicationRecord
     )
     ApplicationLog.create
     MemberApplicationMailer.new_member_application(self).deliver_later
+    member_and_recommender_emails.each { |email| MemberApplicationMailer.submitted_application_notification(self, email).deliver_later}
+  end
+
+  def member_and_recommender_emails
+    [self.email_address, self.recommend_email].reject(&:blank?)
   end
 
   def twilio_phone_number_type(phone_number)
@@ -73,7 +85,7 @@ class MemberApplication < ApplicationRecord
   end
 
   def update_expiration!
-    self.update(application_expiration_date: today + 60.days)
+    self.application_expiration_date = today + 60.days
   end
 
   private

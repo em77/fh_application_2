@@ -1,7 +1,0 @@
-Hello,
-
-<%= "#{@member_application.first_name} #{@member_application.last_name}" %> has submitted an application to be a new member of Fountain House.
-
-View the application here: <%= "https://www.#{Rails.application.credentials.sendgrid[:from_domain_name]}.org/member_applications/#{@member_application.id}" %>
-
-For security purposes, this link will expire on <%= @member_application.application_expiration_date.strftime("%B %-d, %Y") %>
