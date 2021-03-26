@@ -16,8 +16,9 @@ class MemberApplicationsController < ApplicationController
       if file_types_valid? && member_application.update(application_status: "submitted")
         member_application.finalize!
         flash[:success] = "Your application was submitted successfully"
-        redirect_to member_application_path(member_application, just_submitted: true)
+        redirect_to member_application_path(member_application)
       else
+        member_application.application_status = "draft"
         flash.now[:error] = member_application.errors.full_messages.to_sentence
         render :new, locals: { member_application: member_application }
       end
@@ -59,8 +60,9 @@ class MemberApplicationsController < ApplicationController
       if file_types_valid? && member_application.update(member_application_params.merge(application_status: "submitted"))
         member_application.finalize!
         flash[:success] = "Your application was submitted successfully"
-        redirect_to member_application_path(member_application, just_submitted: true)
+        redirect_to member_application_path(member_application)
       else
+        member_application.reload
         flash.now[:error] = member_application.errors.full_messages.to_sentence
         render :edit, locals: { member_application: member_application }
       end
