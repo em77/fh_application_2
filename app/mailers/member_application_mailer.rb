@@ -2,7 +2,7 @@ class MemberApplicationMailer < ApplicationMailer
   def new_member_application(member_application)
     @member_application = member_application
 
-    mail to: Rails.application.credentials.dig(:member_application, member_application.bronx_or_manhattan.downcase.to_sym),
+    mail to: clubhouse_email,
          subject: "New member application from #{member_application.first_name} #{member_application.last_name}"
   end
 
@@ -17,5 +17,12 @@ class MemberApplicationMailer < ApplicationMailer
 
     mail to: rcpt,
          subject: "Application submitted for #{member_application.first_name} #{member_application.last_name}"
+  end
+
+  private
+
+  def clubhouse_email
+    @member_application.save if @member_application.clubhouse.blank?
+    @member_application.reload.clubhouse.email_address
   end
 end

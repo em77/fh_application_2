@@ -1,6 +1,11 @@
 require "rails_helper"
 
 feature "app submit" do
+  before do
+    Clubhouse.create(name: "The Best Clubhouse", email_address: "best@example.com")
+    Clubhouse.create(name: "The Second Best Clubhouse", email_address: "secondbest@example.com")
+  end
+
   scenario "user can submit an app with valid attachments", js: true do
     visit new_member_application_path
     page.attach_file(
@@ -18,6 +23,7 @@ feature "app submit" do
       Rails.root.join("lib/sample_attachments/sun.jpg"),
       make_visible: true
     )
+
     fill_out_app(true)
 
     expect_any_instance_of(Twilio::REST::Client).to receive_message_chain('lookups.phone_numbers.fetch').and_return({ 'type' => 'mobile' })
@@ -52,6 +58,7 @@ feature "app submit" do
       Rails.root.join("lib/sample_attachments/sun.jpg"),
       make_visible: true
     )
+
     fill_out_app(true)
 
     accept_confirm do
@@ -82,6 +89,7 @@ feature "app submit" do
       Rails.root.join("lib/sample_attachments/sun.jpg"),
       make_visible: true
     )
+
     fill_out_app(true)
 
     # Remove phone numbers

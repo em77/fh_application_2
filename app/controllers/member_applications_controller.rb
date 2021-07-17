@@ -151,7 +151,7 @@ class MemberApplicationsController < ApplicationController
       :hospital_recent_start_date, :hospital_recent_end_date, :hospital_first_start_date,
       :hospital_first_end_date, :eth_aa_carrib, :eth_black_other, :eth_asian_fe,
       :eth_asian_se, :eth_asian_is, :eth_white_na, :eth_white_me, :eth_white_amer,
-      :eth_white_eu, :eth_white_other
+      :eth_white_eu, :eth_white_other, :clubhouse_id
     )
   end
 end

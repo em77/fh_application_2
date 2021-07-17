@@ -25,7 +25,7 @@ class MemberApplication < ApplicationRecord
     :residence_time_length, :recommend_name, :recommend_agency,
     :recommend_phone_number, :recommend_agency_type,
     :recommend_known_length, :tour_fh, :total_income,
-    :hospitalization_count, :bronx_or_manhattan, :member_signature,
+    :hospitalization_count, :member_signature,
     :referral_signature, :current_housing_type,
     :live_alone_or_with_others, :have_homeless_history, :reside_with_minors,
     :marital_status, :have_children, :are_you_veteran, :us_citizen,
@@ -42,10 +42,13 @@ class MemberApplication < ApplicationRecord
     :satisfaction_living_sit, :satisfaction_get_around, :satisfaction_vision,
     :satisfaction_overall_sense, :satisfaction_medication, :satisfaction_overall_life,
     :wanted_reduce_substance_use, :been_annoyed_by_substance_criticism,
-    :felt_bad_about_substance_use, :ever_used_substances_for_hangover,
-    presence: true, unless: :is_draft?
+    :felt_bad_about_substance_use, :ever_used_substances_for_hangover, presence: true, unless: :is_draft?
+
+  validates_presence_of :clubhouse, message: "Please select what organization you are applying to in the Signature section",
+    unless: :old_org_choice_is_present?
 
   before_save :update_expiration!
+  before_save :migrate_to_using_clubhouses
   after_create :send_edit_application_notification_email, if: :is_draft?
 
   def is_draft?
@@ -108,5 +111,16 @@ class MemberApplication < ApplicationRecord
 
   def today
     Time.current.in_time_zone("Eastern Time (US & Canada)").to_date
+  end
+
+  def migrate_to_using_clubhouses
+    return unless old_org_choice_is_present? && self.clubhouse.blank?
+
+    found_clubhouse = Clubhouse.find_by_name("Fountain House - #{self.bronx_or_manhattan}")
+    self.clubhouse = found_clubhouse
+  end
+
+  def old_org_choice_is_present?
+    self.bronx_or_manhattan.present?
   end
 end

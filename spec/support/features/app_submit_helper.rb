@@ -174,7 +174,7 @@ module Features
 
       choose("member_application_tour_fh_yes")
 
-      choose("member_application_bronx_or_manhattan_manhattan")
+      select "The Best Clubhouse", from: "member_application_clubhouse_id"
     end
   end
 end

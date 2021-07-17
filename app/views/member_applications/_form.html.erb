@@ -743,19 +743,8 @@
 
     <div class="card-body">
       <div class="left-right-container">
-        <%= f.label :bronx_or_manhattan, ("Are you applying" +
-          " to Fountain House Manhattan or Fountain House Bronx?"),
-          class: "position-left" %>
-        <%= f.form_group :bronx_or_manhattan do %>
-          <div class="position-right">
-            <%= f.radio_button :bronx_or_manhattan, "Manhattan",
-              label: "Manhattan", required: true,
-              inline: true %>
-            <%= f.radio_button :bronx_or_manhattan, "Bronx", label: "Bronx",
-              required: true,
-              inline: true %>
-          </div>
-        <% end %>
+        <%= f.select(:clubhouse_id, Clubhouse.all.map { |clubhouse| [clubhouse.name, clubhouse.id] },
+          { label: "What organization are you applying to?", include_blank: true, required: true }) %>
       </div>
 
       <%= f.text_field :member_signature, label: ("Please sign your name to" +
