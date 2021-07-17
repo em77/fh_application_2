@@ -2,6 +2,7 @@
   "name": "fh_application_2",
   "private": true,
   "dependencies": {
+    "@babel/plugin-proposal-private-methods": "^7.14.5",
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "@rails/activestorage": "^6.0.0",
