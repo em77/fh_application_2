@@ -1,4 +1,6 @@
 class MemberApplication < ApplicationRecord
+  belongs_to :clubhouse, optional: true
+
   has_one_attached :psych_eval
   has_one_attached :psych_social
   has_one_attached :insurance_card
