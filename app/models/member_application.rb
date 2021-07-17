@@ -114,13 +114,13 @@ class MemberApplication < ApplicationRecord
   end
 
   def migrate_to_using_clubhouses
-    return unless old_org_choice_is_present? && self.clubhouse.blank?
+    return unless self.bronx_or_manhattan.present? && self.clubhouse.blank?
 
     found_clubhouse = Clubhouse.find_by_name("Fountain House - #{self.bronx_or_manhattan}")
     self.clubhouse = found_clubhouse
   end
 
   def old_org_choice_is_present?
-    self.bronx_or_manhattan.present?
+    self.bronx_or_manhattan.present? || is_draft?
   end
 end
